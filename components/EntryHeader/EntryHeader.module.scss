@@ -1,14 +1,65 @@
 @import 'styles/Variables';
 
 .entry-header {
-  margin-bottom: 2rem;
   color: var(--color-white);
-  background-color: var(--color-primary);
-
-  @media (min-width: $breakpoint-small) {
-    margin-bottom: 10rem;
-  }
+    
+  // @media (min-width: $breakpoint-small) {
+  //   margin-top: 155px;
+  // }
+  margin-top: 155px;
 }
+
+.EntryHeader_image {
+  position: relative;
+
+  figure {
+    margin: 0;
+  }
+
+
+}
+  @media (min-width: $breakpoint-small) {
+  .featured-image {
+    // height: 1000px !important;
+  }
+  }
+
+.heading-home {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0,0,0, .45); 
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 14.5rem;
+    @media screen and (max-width: 925px) {
+      font-size: 5rem;
+    }
+}
+
+
+  .text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    text-align: center;
+    color: white;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 4px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
 
 .text,
 .image {
@@ -18,12 +69,11 @@
 
 .text {
   width: 100%;
-  max-width: 82rem;
-  padding: 8.25rem 0;
 }
 
 .title {
-  line-height: 1.25;
+  line-height: 1em;
+  font-weight: 700;
 }
 
 .byline {
@@ -35,10 +85,15 @@
 .image {
   display: block;
   position: relative;
+  min-height: 315px;
+  figure {
+    min-height: 315px;
+    object-fit: cover;
+    img {min-height: 315px;object-fit: cover;}
+  }
 
   &:before {
     content: ' ';
-    position: absolute;
     height: 50%;
     width: 100%;
     background-color: var(--color-white);

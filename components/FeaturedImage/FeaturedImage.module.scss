@@ -1,7 +1,30 @@
 @import 'styles/Variables';
 
 .featured-image {
-  border: 2rem solid var(--color-white);
   background-color: var(--color-white);
-  box-shadow: $box-shadow;
+
+    @media (min-width: $breakpoint-small)  {
+        height: 655px;
+        overflow: hidden;
+      img {
+        height: 100% !important;
+        width: 100% !important;
+        object-fit: cover;
+        object-position: top;
+      }
+    }
+}
+
+.home-image {
+  background-color: var(--color-white);
+
+    @media (min-width: $breakpoint-small)  {
+        height: 1000px;
+        overflow: hidden;
+      img {
+        height: 100% !important;
+        width: 100% !important;
+        object-fit: cover;
+      }
+    }
 }

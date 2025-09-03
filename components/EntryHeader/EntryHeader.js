@@ -1,5 +1,6 @@
 import className from 'classnames/bind';
 import { FeaturedImage, Heading, PostInfo } from 'components';
+import { useRouter } from 'next/router';
 
 import styles from './EntryHeader.module.scss';
 const cx = className.bind(styles);
@@ -15,25 +16,32 @@ const cx = className.bind(styles);
  */
 export default function EntryHeader({ title, image, date, author, className }) {
   const hasText = title || date || author;
-
+  const { pathname } = useRouter(); // Get the current path
+  const isHome = pathname === '/'; // Check if it's the home page
   return (
     <div className={cx(['entry-header', className])}>
-      {hasText && (
-        <div className={cx('text')}>
-          {!!title && <Heading className={cx('title')}>{title}</Heading>}
-          <PostInfo className={cx('byline')} author={author} date={date} />
-        </div>
-      )}
-
       {image && (
         <div className={cx('image')}>
-          <div className="container">
+          {/* <div className="container"> */}
+          {hasText && (
+              <div className={cx('text')}>
+                {!!title && <Heading className={cx('title', 'container')}>{title}</Heading>}
+                <PostInfo className={cx('byline')} author={author} date={date} />
+              </div>
+            )}
+
+          {isHome && (
+            <Heading className={cx('heading-home')} level="h1">
+              Cal Maritime Corporation
+            </Heading>
+          )}
+
             <FeaturedImage
               className={cx('featured-image')}
               image={image}
               priority
             />
-          </div>
+          {/* </div> */}
         </div>
       )}
     </div>
