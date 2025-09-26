@@ -2,107 +2,91 @@
 
 .entry-header {
   color: var(--color-white);
-    
-  // @media (min-width: $breakpoint-small) {
-  //   margin-top: 155px;
-  // }
   margin-top: 155px;
 }
 
-.EntryHeader_image {
+/* image wrapper must be positioning context */
+.image {
   position: relative;
+  display: block;
+  min-height: 315px;
 
-  figure {
-    margin: 0;
-  }
-
-
+  figure { margin: 0; min-height: 315px; object-fit: cover; }
+  figure img { min-height: 315px; object-fit: cover; }
 }
-  @media (min-width: $breakpoint-small) {
-  .featured-image {
-    // height: 1000px !important;
-  }
-  }
+
+/* 🔐 overlay fills the image; H1 will be aligned by the inner .container */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;              /* overlay shouldn’t block links */
+  display: flex;                     /* let us vertically position easily */
+  align-items: center;               /* center vertically; tweak as needed */
+}
+
+/* make the container inside overlay occupy height so flex works */
+.overlay > .container {
+  width: 100%;
+  display: flex;
+  align-items: center;               /* center vertically within overlay */
+}
+
+/* the H1 itself uses normal flow inside the container, so left edge matches nav */
+.heading-home {
+  position: static;                  /* ⬅️ important: no absolute here */
+  margin: 0;
+  // line-height: 1.05;
+  text-align: left;
+  letter-spacing: 2px;
+  // font-weight: 800;
+  text-transform: uppercase;
+  /* responsive size – adjust if you like */
+  // font-size: clamp(2.5rem, 8vw, 6rem);
+  pointer-events: auto;              /* allow text selection if you want */
+}
+
+/* keep existing blocks if you still use them elsewhere */
+.text,
+.image { margin: auto; text-align: center; }
+.text { width: 100%; }
+.title { line-height: 1em; font-weight: 700; }
+.byline { font-weight: $font-weight-bold; font-size: 1.2rem; text-transform: uppercase; }
+
+/* optional layering to ensure image sits under overlay */
+.featured-image { margin: 0; position: relative; z-index: 1; }
+
 
 .heading-home {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(0,0,0, .45); 
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 700;
-    font-size: 14.5rem;
-    @media screen and (max-width: 925px) {
-      font-size: 5rem;
-    }
-}
-
-
-  .text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    text-align: center;
-    color: white;
-    background: rgba(0, 0, 0, 0.4);
-    border-radius: 4px;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-
-
-.text,
-.image {
-  margin: auto;
-  text-align: center;
-}
-
-.text {
-  width: 100%;
-}
-
-.title {
-  line-height: 1em;
-  font-weight: 700;
-}
-
-.byline {
-  font-weight: $font-weight-bold;
-  font-size: 1.2rem;
-  text-transform: uppercase;
-}
-
-.image {
-  display: block;
-  position: relative;
-  min-height: 315px;
-  figure {
-    min-height: 315px;
-    object-fit: cover;
-    img {min-height: 315px;object-fit: cover;}
-  }
-
-  &:before {
-    content: ' ';
-    height: 50%;
-    width: 100%;
-    background-color: var(--color-white);
-    bottom: 0;
-    left: 0;
-    z-index: 0;
-  }
-}
-
-.featured-image {
+  position: relative;   /* anchor for before/after */
+  display: inline-block;
   margin: 0;
+  line-height: 1.05;
+  text-transform: uppercase;
+  text-align: left;
+  width: 100%;
+  // font-weight: 800;
+  // font-size: clamp(2.5rem, 8vw, 6rem);
+
+  /* top rule */
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -25px;              /* adjust spacing above */
+    width: 200px;            /* set exact width */
+    height: 2px;             /* thickness */
+    background: #C69214;     /* gold */
+  }
+
+  /* bottom rule */
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -25px;           /* adjust spacing below */
+    width: 200px;            /* can match top or differ */
+    height: 2px;
+    background: #C69214;
+  }
 }

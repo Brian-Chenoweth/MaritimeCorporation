@@ -20,29 +20,13 @@ h6 {
 
 h1 {
   font-size: 14rem;
-  line-height: 150%;
+  // line-height: 150%;
   text-transform: uppercase;
-  font-family: 'Source Sans Pro', Helvetica, Arial, Lucida, sans-serif;
-  letter-spacing: 5px;
-  line-height: 0.95em;
-  text-align: left;
-  font-weight: 600;
-  margin-bottom: 0;
-  @media (max-width: 1085px) {
-    font-size: 12rem;
-  }
-  @media (max-width: 950px) {
-    font-size: 10rem;
-  }
-  @media (max-width: 790px) {
-    font-size: 8rem;
-  }
-  @media (max-width: 600px) {
-    font-size: 6rem;
-  }
-  @media (max-width: 470px) {
-    font-size: 4rem;
-  }
+  // font-family: 'Source Sans Pro', Helvetica, Arial, Lucida, sans-serif;
+  font-family: "abolition", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+
 }
 
 h1.postTitle {
