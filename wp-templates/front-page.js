@@ -55,10 +55,10 @@ export default function Component() {
             <Heading className={styles.heading} level="h1">
               Welcome to your Blueprint
             </Heading>
-            <p className={styles.description}>
+            {/* <p className={styles.description}>
               Achieve unprecedented performance with modern frameworks and the
               world&apos;s #1 open source CMS in one powerful headless platform.{' '}
-            </p>
+            </p> */}
             <div className={styles.actions}>
               <Button styleType="secondary" href="/contact-us">
                 GET STARTED
@@ -83,36 +83,8 @@ export default function Component() {
               </span>
             </CTA>
           </section>
-          <section className={styles.posts}>
-            <Heading className={styles.heading} level="h2">
-              Latest Posts
-            </Heading>
-            <Posts posts={data.posts?.nodes} id="posts-list" />
-          </section>
-          <section className="cta">
-            <CTA
-              Button={() => (
-                <Button href="/posts">
-                  Get Started <FaArrowRight style={{ marginLeft: `1rem` }} />
-                </Button>
-              )}
-            >
-              <span>
-                Learn about Core Web Vitals and how Headless Platform can help
-                you reach your most demanding speed and user experience
-                requirements.
-              </span>
-            </CTA>
-          </section>
-          <section className={styles.testimonials}>
-            <Heading className={styles.heading} level="h2">
-              Testimonials
-            </Heading>
-            <p className={styles.description}>
-              Here are just a few of the nice things our customers have to say.
-            </p>
-            <Testimonials testimonials={data?.testimonials?.nodes} />
-          </section>
+
+
         </div>
       </Main>
       <Footer menuItems={footerMenu} />

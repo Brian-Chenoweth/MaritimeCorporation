@@ -119,10 +119,7 @@ export default function Footer({ menuItems }) {
         <NavigationMenu className={cx('nav')} menuItems={menuItems} />
 
         <div className={cx('copyright')}>
-          &copy; {new Date().getFullYear()} Blueprint Media &#183; Powered By{' '}
-          <a href="https://wpengine.com/headless-wordpress">
-            Headless Platform
-          </a>
+          &copy; {new Date().getFullYear()} Cal Maritime Corporation
         </div>
       </div>
     </footer>
