@@ -7,6 +7,7 @@ import FormatDate from './FormatDate';
 import Heading from './Heading';
 import Header from './Header';
 import HomepageCampusLife from './HomepageCampusLife';
+import HomepageNonProfit from './HomepageNonProfit';
 import LoadMore from './LoadMore';
 import Main from './Main';
 import NavigationMenu from './NavigationMenu/NavigationMenu';
@@ -35,6 +36,7 @@ export {
   Heading,
   Header,
   HomepageCampusLife,
+  HomepageNonProfit,
   LoadMore,
   Main,
   NavigationMenu,

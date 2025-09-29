@@ -20,10 +20,10 @@ export default function HomepageCampusLife() {
             </div>
             <figure className="wp-block-media-text__media">
               <Image
-                src="/home/students-eating-outdoors-campus-mural-patio-area.jpg"
+                src="/home/cal-maritime-marketplace-building-campus-life-support.jpg"
                 width={980}
                 height={630}
-                alt="Students sitting under umbrellas at outdoor tables near a colorful mural on a sunny campus patio."
+                alt="Exterior of Cal Maritime Marketplace building with palm trees and clear blue sky, representing campus life improvements and student support services featured on Cal Maritime Corporation’s website."
                 layout="responsive"
               />
             </figure>

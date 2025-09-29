@@ -11,6 +11,7 @@ import {
   CTA,
   NavigationMenu,
   HomepageCampusLife,
+  HomepageNonProfit,
   SEO,
   Header,
   Footer,
@@ -54,6 +55,8 @@ export default function Component() {
         <div className="container">
 
          <HomepageCampusLife />
+
+         
           
           <section className="hero text-center">
             <Heading className={styles.heading} level="h1">
@@ -68,6 +71,9 @@ export default function Component() {
               </Button>
             </div>
           </section>
+
+          <HomepageNonProfit />
+
           <section className="cta">
             <CTA
               Button={() => (
