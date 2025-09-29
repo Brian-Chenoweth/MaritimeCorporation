@@ -20,13 +20,10 @@ h6 {
 
 h1 {
   font-size: 14rem;
-  // line-height: 150%;
   text-transform: uppercase;
-  // font-family: 'Source Sans Pro', Helvetica, Arial, Lucida, sans-serif;
   font-family: "abolition", sans-serif;
   font-weight: 400;
   font-style: normal;
-
 }
 
 h1.postTitle {
@@ -38,14 +35,19 @@ h1.postTitle {
 }
 
 h2 {
-  font-size: 3.4rem;
-  line-height: 3.75rem;
+  font-size: 6rem;
+  line-height: 6.5rem;
   color: var(--color-primary);
-  font-weight: 500;
-  margin: 0 0 3.25rem 0 !important;
-  letter-spacing: normal;
-  font-weight: 600;
-  font-family: 'Source Sans Pro', sans-serif;
+  // font-weight: 500;
+  margin: 0 0 2.25rem 0;
+  letter-spacing: .24rem;
+  // font-weight: 600;
+  // font-family: 'Source Sans Pro', sans-serif;
+
+  text-transform: uppercase;
+  font-family: "abolition", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 
 }
 
@@ -94,4 +96,8 @@ a {
   text-decoration: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.gold {
+  color: #CB8200;
 }
