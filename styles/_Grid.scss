@@ -236,7 +236,7 @@
   }
 }
 
-.green-image-right, .white-image-left, .white-image-right, .yellow-image-left, .yellow-image-right, .bg-green, .bg-white, .bg-yellow, .bg-green-dark {
+.green-image-right, .white-image-left, .white-image-right, .yellow-image-left, .yellow-image-right, .bg-green, .bg-white, .bg-yellow, .bg-green-dark, .bg-blue {
     padding: 4rem 0;
     @media (min-width: $breakpoint-small) {
       padding: 6rem 0;
@@ -298,6 +298,12 @@
     background-color: rgba(183,205,194,0.42);
   }
 }
+
+.bg-blue {
+  &::before {
+    background-color: #D9EBFA;
+  }
+} 
 
 .bg-green-dark {
   &::before {

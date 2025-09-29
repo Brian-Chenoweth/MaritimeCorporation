@@ -12,6 +12,7 @@ import {
   NavigationMenu,
   HomepageCampusLife,
   HomepageNonProfit,
+  HomepageIntro,
   SEO,
   Header,
   Footer,
@@ -53,6 +54,8 @@ export default function Component() {
       <Main className={styles.home}>
         <EntryHeader image={mainBanner} />
         <div className="container">
+
+          <HomepageIntro />
 
          <HomepageCampusLife />
 
