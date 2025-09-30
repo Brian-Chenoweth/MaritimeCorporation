@@ -1,7 +1,7 @@
 // EntryHeader.jsx
 import className from 'classnames/bind';
 import { useRouter } from 'next/router';
-import { FeaturedImage, Heading, PostInfo } from 'components';
+import { FeaturedImage, Heading } from 'components';
 
 import styles from './EntryHeader.module.scss';
 
