@@ -23,6 +23,7 @@
   pointer-events: none;              /* overlay shouldn’t block links */
   display: flex;                     /* let us vertically position easily */
   align-items: center;               /* center vertically; tweak as needed */
+  background-color: rgba(0,0,0,.4);
 }
 
 /* make the container inside overlay occupy height so flex works */

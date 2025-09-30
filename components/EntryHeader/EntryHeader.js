@@ -16,26 +16,25 @@ export default function EntryHeader({ title, image, date, author, className }) {
     <div className={cx(['entry-header', className])}>
       {image && (
         <div className={cx('image')}>
-          {/* regular text block (if you keep it) */}
-          <div className="container">
-            {hasText && (
-              <div className={cx('text')}>
-                {!!title && <Heading className={cx('title', 'container')}>{title}</Heading>}
-                <PostInfo className={cx('byline')} author={author} date={date} />
-              </div>
-            )}
-          </div>
 
-          {/* ✅ overlay that sits ABOVE the image and uses the SAME container */}
-          {isHome && (
+
             <div className={cx('overlay')}>
               <div className="container">
-                <Heading className={cx('heading-home')} level="h1">
-                  Cal Maritime Corporation
-                </Heading>
+
+                {hasText && (
+                  <>
+                    {!!title && <Heading className={cx('heading-home')}>{title}</Heading>}
+                  </>
+                )}
+
+                {isHome && (
+                  <Heading className={cx('heading-home')} level="h1">Cal Maritime Corporation</Heading>
+                )}
+                                
               </div>
             </div>
-          )}
+
+
 
           <FeaturedImage className={cx('featured-image')} image={image} priority />
         </div>

@@ -4,19 +4,19 @@
   background-color: var(--color-white);
 
     @media (min-width: $breakpoint-small)  {
-        height: 655px;
+        height: 800px;
         overflow: hidden;
       img {
         height: 100% !important;
         width: 100% !important;
         object-fit: cover;
-        object-position: top;
+        object-position: center center;
       }
     }
 }
 
 .home-image {
-  background-color: var(--color-white);
+  // background-color: var(--color-white);
 
     @media (min-width: $breakpoint-small)  {
         height: 800px;
