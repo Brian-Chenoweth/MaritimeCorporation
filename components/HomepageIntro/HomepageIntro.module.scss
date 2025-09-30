@@ -2,7 +2,7 @@
 
 
 .homeIntro {
-  padding: 10rem 0;
+  padding: 10rem 0 !important;
 }
 
 .content {
@@ -41,5 +41,13 @@
   p {
     margin: 0;
   }
+
+  .numberItem {
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
+    // align-items: center;
+  }
+
 }
 

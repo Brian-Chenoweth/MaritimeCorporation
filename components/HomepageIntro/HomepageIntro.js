@@ -18,17 +18,17 @@ export default function HomepageIntro() {
         <div className={styles.numbers}>
           
           <div className={styles.numberItem}>
-            <h2><CountUp end={95} duration={5}/>+</h2>
+            <h2><CountUp end={95} duration={5}/><span  className='blue'>+</span></h2>
             <p>Years Supporting Cadets</p>
           </div>
 
           <div className={styles.numberItem}>
-            <h2><CountUp end={60}  duration={5}/>+</h2>
+            <h2><CountUp end={60}  duration={5}/><span  className='blue'>+</span></h2>
             <p>Times circumnavigating the globe in Corporation-owned ships</p>
           </div>
 
           <div className={styles.numberItem}>
-            <h2>$<CountUp end={50}  duration={5}/> million+</h2>
+            <h2>$<CountUp end={50}  duration={5}/> million<span  className='blue'>+</span></h2>
             <p>Given in support of the academy</p>
           </div>
 
