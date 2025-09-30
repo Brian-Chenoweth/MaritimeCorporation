@@ -452,31 +452,43 @@
 
 
 .wp-block-details {
-  background-color: var(--color-tertiary);
-  padding: 2em;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  background-color: #F8F8F7;
+  padding:0;
+  // display: flex;
+  // align-items: center;
+  // flex-direction: column;
   margin: 2rem 0;
 
   summary {
-    color: var(--color-primary);
     font-family: 'Source Sans Pro', Helvetica, Arial, Lucida, sans-serif;
-    text-transform: uppercase;
-    font-size: 2.5rem;
+    font-size: 1.875rem;
     font-weight: 600;
     padding:0;
     width: 100%;
-    text-align: center;
+    list-style: none;
+    // background-color: pink;
     &::marker {
-      font-size: 2.25rem;
+      display: none !important;
+    }
+    &::-webkit-details-marker {
+      display: none;
+    }
+    &::before {
+      transition: all .3s;
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    display: inline-block;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    content: '\2b';
+    color: #00BEB4;
+    margin-right: 2rem;
+
     }
   }
 
   p {
-    text-align: center;
+    // text-align: center;
     margin-top: 3rem;
   }
 
@@ -484,7 +496,7 @@
     transition: all .3s;
     color: var(--color-primary);
     font-weight: 700;
-    text-transform: uppercase;
+    // text-transform: uppercase;
     text-decoration: none;
     &:hover {
       // text-decoration: 2px solid #BD8B13 underline;
@@ -500,6 +512,59 @@
     }
   }
 
+}
+
+details[open] > summary::before {
+  transition: all .3s;
+  content: '\2212'; // minus (–) or use Font Awesome code e.g. '\f068'
+}
+
+.wp-block-details[open] > summary {
+  background-color: #00BEB4;   // your highlight color
+  color: #fff;                 // text color on open
+}
+
+
+.wp-block-details summary {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1rem 1.5rem;      // inner spacing
+  background-color: #F8F8F7;    // default
+  // border: 1px solid #ddd;
+  cursor: pointer;
+  transition: background-color .3s ease, color .3s ease;
+}
+
+/* Icon before text */
+.wp-block-details summary::before {
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  content: '\2b';   // plus
+  color: #00BEB4;
+  margin-right: 1rem;
+  transition: color .3s ease, transform .3s ease;
+}
+
+/* Open state */
+.wp-block-details[open] > summary {
+  background-color: #00BEB4;
+  color: #fff;
+  padding: 1rem 1.5rem;    // keep padding consistent
+}
+
+.wp-block-details[open] > * {
+  padding: 0 2rem;
+}
+
+.wp-block-details[open] {
+  padding: 0 0 2rem 0;
+}
+
+/* Change icon on open */
+.wp-block-details[open] > summary::before {
+  content: '\2212';   // minus
+  color: #fff;        // matches new text color
 }
 
 
