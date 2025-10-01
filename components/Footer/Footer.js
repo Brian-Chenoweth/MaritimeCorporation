@@ -62,7 +62,6 @@ export default function Footer({
 
   // Only fetch when NOT on homepage
   const { data: tdata } = useQuery(FOOTER_TESTIMONIALS_QUERY, { skip: isHome });
-  const tnodes = tdata?.testimonials?.nodes ?? [];
 
   return (
     <>
