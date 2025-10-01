@@ -7,8 +7,6 @@ import {
 } from 'react-icons/fa';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useQuery, gql } from '@apollo/client';
 import appConfig from 'app.config.js';
 
 
@@ -16,37 +14,6 @@ import { NavigationMenu } from '../';
 
 import styles from './Footer.module.scss';
 const cx = classNames.bind(styles);
-
-// ⬇ Inline a fragment so we don't depend on Testimonials.fragments
-const FOOTER_TESTIMONIALS_FRAGMENT = gql`
-  fragment FooterTestimonialsFragment on Testimonial {
-    databaseId
-    title
-    featuredImage {
-      node {
-        sourceUrl
-        altText
-        mediaDetails { width height }
-      }
-    }
-    testimonialFields {
-      testimonialContent
-      testimonialJob
-      testimonialAuthor
-    }
-  }
-`;
-
-const FOOTER_TESTIMONIALS_QUERY = gql`
-  ${FOOTER_TESTIMONIALS_FRAGMENT}
-  query FooterTestimonials {
-    testimonials {
-      nodes {
-        ...FooterTestimonialsFragment
-      }
-    }
-  }
-`;
 
 export default function Footer({
   siteTitle,
