@@ -61,7 +61,7 @@ export default function Component() {
 
          
           
-          <section className="hero text-center">
+          {/* <section className="hero text-center">
             <Heading className={styles.heading} level="h1">
               Welcome to your Blueprint
             </Heading>
@@ -73,7 +73,7 @@ export default function Component() {
                 LEARN MORE
               </Button>
             </div>
-          </section>
+          </section> */}
 
           <HomepageNonProfit />
 
