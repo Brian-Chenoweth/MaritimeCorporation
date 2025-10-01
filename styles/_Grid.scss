@@ -969,3 +969,39 @@ span.blue {
   }
 
 }
+
+
+
+.three-cards {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 3rem;
+  margin: 5rem 0 0 0;
+
+  .wp-block-column {
+    background-color: #F8F8F7;
+  }
+
+
+  @media (max-width: $breakpoint-medium) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+    @media (max-width: $breakpoint-small) {
+    grid-template-columns: 1fr;
+  }
+
+  .wp-block-group {
+    padding: 0 3rem 3rem 3rem !important;
+
+  }
+
+    figure {
+      margin: 0 !important;
+    }
+
+    h3 {
+      margin: 3rem 0 2rem 0;
+    }
+
+}
