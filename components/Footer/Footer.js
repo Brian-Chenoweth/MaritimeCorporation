@@ -66,13 +66,6 @@ export default function Footer({
 
   return (
     <>
-      {!isHome && tnodes.length > 0 && (
-         <div className="container">
-          <Testimonials testimonials={tnodes} />
-        </div>
-      )}
-
-      
       <footer className={cx('footer')}>
         <div className={cx('container', styles.footerWrap)}>
           <div className={cx('footer-nav-contact-info')}>
@@ -97,7 +90,7 @@ export default function Footer({
               <Link href="/" legacyBehavior>
                 <a className={cx('cppText')}>{title ?? 'Cal Maritime Corporation'}</a>
               </Link>
-              <a href="https://maps.app.goo.gl/wfAGSv2u8VPyjxgR6" target='_blank' className={cx('phone')}>200 Maritime Academy Dr., Vallejo, CA 94590</a>
+              <a href="https://maps.app.goo.gl/wfAGSv2u8VPyjxgR6" target='_blank' className={cx('phone')} rel="noreferrer">200 Maritime Academy Dr., Vallejo, CA 94590</a>
               <a href="tel:7076541000" className={cx('phone')}>707-654-1000</a>
             </div>
           </div>
@@ -123,7 +116,7 @@ export default function Footer({
             {appConfig?.socialLinks && (
               <div className={cx('social-links')}>
                 <ul aria-label="Social media">
-                  
+
                   {appConfig.socialLinks?.instagramUrl && (
                     <li>
                       <a
