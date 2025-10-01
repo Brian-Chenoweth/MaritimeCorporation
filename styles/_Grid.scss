@@ -905,3 +905,67 @@ article form {
 span.blue {
   color: #0067B9;
 }
+
+.board-member-wrap {
+
+  margin: 5rem 0 0 0;
+   
+  .board-member {
+    display: grid;
+    // grid-template-columns: minmax(0, 25%) 1fr; /* image | content */
+    gap: 2rem;
+    align-items: start;
+
+
+    @media (min-width: $breakpoint-small) {
+      // grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0, 25%) 1fr; 
+    }
+
+
+  }
+  
+
+  h3 {
+    color: #CB8200;
+    font-family: "utopia-std-display", serif;
+    font-size: 2.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 3.3rem;
+    margin: 0 0 .75rem 0;
+  }
+
+  h4 {
+    color: #004931;
+    font-family: "Source Sans Pro";
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2.688rem;
+    margin: 0 0 .5rem 0;
+  }
+
+  h5, h6 {
+    color: #004931;
+    font-family: "Source Sans Pro";
+    font-size: 1.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height:  2.56rem;
+    margin: 0 0 .25rem 0;
+  }
+
+  p {
+    color: #181816;
+    margin: 2rem 0;
+    /* maritime.calpoly.edu/Source Sans Pro/Regular */
+    font-family: var(--font-family-Font-1, "Source Sans Pro");
+    // font-size: 14.4px;
+    font-style: normal;
+    font-weight: 400;
+    // line-height: var(--line-height-21_6, 21.6px); /* 150% */
+    line-height: 2.875rem;
+  }
+
+}
