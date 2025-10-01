@@ -57,11 +57,6 @@ export default function Footer({
   resourcesMenuItems,
   aboutMenuItems,
 }) {
-  const router = useRouter();
-  const isHome = router.pathname === '/';
-
-  // Only fetch when NOT on homepage
-  const { data: tdata } = useQuery(FOOTER_TESTIMONIALS_QUERY, { skip: isHome });
 
   return (
     <>
