@@ -36,6 +36,11 @@ export default function Component() {
     data?.generalSettings;
   const primaryMenu = data?.headerMenuItems?.nodes ?? [];
   const footerMenu = data?.footerMenuItems?.nodes ?? [];
+    const quickLinks   = data?.quickFooterMenuItems?.nodes ?? [];
+  const aboutLinks   = data?.aboutFooterMenuItems?.nodes ?? [];
+  const navOne       = data?.footerSecondaryMenuItems?.nodes ?? [];
+  const navTwo       = data?.footerTertiaryMenuItems?.nodes ?? [];
+  const resources    = data?.resourcesFooterMenuItems?.nodes ?? [];
 
   const mainBanner = {
     sourceUrl: '/static/banner.jpeg',
@@ -100,51 +105,69 @@ export default function Component() {
 
         </div>
       </Main>
-      <Footer menuItems={footerMenu} />
+      
+      <Footer
+        title={siteTitle}
+        menuItems={quickLinks}                // left column: Quick Footer
+        navOneMenuItems={navOne}              // middle: Footer Secondary
+        navTwoMenuItems={navTwo}              // right: Footer Tertiary
+        resourcesMenuItems={resources} 
+        aboutMenuItems={aboutLinks}        // new Resources block
+      />
     </>
   );
 }
 
-Component.variables = () => {
-  return {
-    headerLocation: MENUS.PRIMARY_LOCATION,
-    footerLocation: MENUS.FOOTER_LOCATION,
-    first: postsPerPage,
-  };
-};
+Component.variables = () => ({
+  headerLocation: MENUS.PRIMARY_LOCATION,
+  // was FOOTER_LOCATION — stop using it on the homepage
+   footerLocation: MENUS.FOOTER_LOCATION,
+  quickFooterLocation: MENUS.QUICK_FOOTER_LOCATION,
+  aboutFooterLocation: MENUS.ABOUT_FOOTER_LOCATION,
+  footerSecondaryLocation: MENUS.FOOTER_SECONDARY_LOCATION,
+  footerTertiaryLocation: MENUS.FOOTER_TERTIARY_LOCATION,
+  resourcesFooterLocation: MENUS.RESOURCES_FOOTER_LOCATION,
+});
 
 Component.query = gql`
   ${BlogInfoFragment}
   ${NavigationMenu.fragments.entry}
-  ${Posts.fragments.entry}
   ${Testimonials.fragments.entry}
   query GetPageData(
-    $headerLocation: MenuLocationEnum
-    $footerLocation: MenuLocationEnum
-    $first: Int
+  $headerLocation: MenuLocationEnum
+  $quickFooterLocation: MenuLocationEnum
+  $aboutFooterLocation: MenuLocationEnum
+  $footerSecondaryLocation: MenuLocationEnum
+  $footerTertiaryLocation: MenuLocationEnum
+  $resourcesFooterLocation: MenuLocationEnum
   ) {
-    posts(first: $first) {
-      nodes {
-        ...PostsItemFragment
-      }
-    }
     testimonials {
       nodes {
         ...TestimonialsFragment
       }
     }
-    generalSettings {
-      ...BlogInfoFragment
-    }
-    headerMenuItems: menuItems(where: { location: $headerLocation }) {
-      nodes {
-        ...NavigationMenuItemFragment
-      }
-    }
-    footerMenuItems: menuItems(where: { location: $footerLocation }) {
-      nodes {
-        ...NavigationMenuItemFragment
-      }
-    }
+    generalSettings { ...BlogInfoFragment }
+  headerMenuItems: menuItems(where: { location: $headerLocation }, first: 100) {
+    nodes { ...NavigationMenuItemFragment }
+  }
+
+  quickFooterMenuItems: menuItems(where: { location: $quickFooterLocation }, first: 100) {
+    nodes { ...NavigationMenuItemFragment }
+    
+  }
+  aboutFooterMenuItems: menuItems(where: { location: $aboutFooterLocation }, first: 100) {
+    nodes { ...NavigationMenuItemFragment }
+    
+  }
+  footerSecondaryMenuItems: menuItems(where: { location: $footerSecondaryLocation }, first: 100) {
+    nodes { ...NavigationMenuItemFragment }
+  }
+  footerTertiaryMenuItems: menuItems(where: { location: $footerTertiaryLocation }, first: 100) {
+    nodes { ...NavigationMenuItemFragment }
+  }
+  resourcesFooterMenuItems: menuItems(where: { location: $resourcesFooterLocation }, first: 100) {
+    nodes { ...NavigationMenuItemFragment }
+  }
   }
 `;
+

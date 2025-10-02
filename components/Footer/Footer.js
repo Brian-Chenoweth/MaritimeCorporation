@@ -43,7 +43,7 @@ export default function Footer({
           </div>
             
             <div className={cx('footer-nav')}>
-              <h3>Integreation</h3>
+              <h3>Integration</h3>
               <NavigationMenu className={cx('quick')} menuItems={menuItems} />
             </div>
 
@@ -144,7 +144,14 @@ export default function Footer({
             &copy; {new Date().getFullYear()} {siteTitle ?? 'California Polytechnic State University'}
           </div>
         </div>
-        {console.log(menuItems, navOneMenuItems, navTwoMenuItems)}
+        {console.log({
+          integration: menuItems,
+          quickLinks: aboutMenuItems,
+          resources: resourcesMenuItems,
+          navOne: navOneMenuItems,
+          navTwo: navTwoMenuItems,
+        })}
+
       </footer>
     </>
   );
