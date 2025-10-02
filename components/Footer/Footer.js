@@ -144,14 +144,6 @@ export default function Footer({
             &copy; {new Date().getFullYear()} {siteTitle ?? 'California Polytechnic State University'}
           </div>
         </div>
-        {console.log({
-          integration: menuItems,
-          quickLinks: aboutMenuItems,
-          resources: resourcesMenuItems,
-          navOne: navOneMenuItems,
-          navTwo: navTwoMenuItems,
-        })}
-
       </footer>
     </>
   );
