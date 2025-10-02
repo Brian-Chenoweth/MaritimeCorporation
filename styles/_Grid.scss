@@ -245,7 +245,7 @@
   }
 }
 
-.green-image-right, .white-image-left, .white-image-right, .yellow-image-left, .yellow-image-right, .bg-green, .bg-white, .bg-yellow, .bg-green-dark, .bg-blue {
+.green-image-right, .white-image-left, .white-image-right, .yellow-image-left, .yellow-image-right, .bg-green, .bg-white, .bg-yellow, .bg-green-dark, .bg-blue, .dark-blue-image-left {
     padding: 4rem 0;
     @media (min-width: $breakpoint-small) {
       padding: 6rem 0;
@@ -404,6 +404,137 @@
     }
   }
 }
+
+.dark-blue-image-left {
+  &::before {
+    background: linear-gradient(51deg, #004078 35%, #006BC5 80%);
+  }
+.wp-block-media-text__content {
+  padding-right: 0 !important;
+ }
+}
+
+.dark-blue-image-left {
+  p, a, h2 {
+    color: var(--color-white);
+  }
+  a {
+    &:hover {
+      color: var(--color-white);
+    }
+  }
+}
+
+.homepage-dark-blue.dark-blue-image-left {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding-right: calc((100vw - 1400px) / 2);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  gap: 0;
+  padding: 0;
+
+  figure.wp-block-media-text__media img {
+    color: transparent !important;
+    width: 100% !important;
+    height: auto !important;
+    height: 100% !important;
+    width: 100% !important;
+    display: block;
+    object-fit: cover;
+    border-radius: 0;
+  }
+
+  figure.wp-block-media-text__media {
+    height: 100%;
+    width: 50%;
+  }
+
+  .wp-block-media-text__content {
+    padding: 5% !important;
+    width: 50%;
+    padding: 5% 8% 5% 5% !important;
+    text-align: center !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+}
+
+
+
+
+
+
+
+/* 1) Fix the section height (cap it) and prevent children from pushing it taller */
+.homepage-dark-blue.dark-blue-image-left.wp-block-media-text.has-media-on-the-left {
+  position: relative;
+  display: grid !important;
+  // grid-template-columns: 1fr 1400px !important; /* left bleed, right container */
+  align-items: stretch;
+  height: 600px;             
+  max-height: 600px;
+  overflow: hidden;          
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row-reverse;
+}
+
+
+
+// /* 4) Right column content: center it vertically and avoid overflow */
+.homepage-dark-blue.dark-blue-image-left .wp-block-media-text__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;      /* vertically center your heading/para */
+  padding: 0 24px;              /* your gutter */
+  min-height: 0;                /* allow flex child to shrink */
+  overflow: hidden;      
+  height: 600px;  
+  position: relative;     /* don’t let inner margins blow height */
+  img {
+    // color: transparent;
+    // width: 100%;
+    // height: auto;
+    width: 300px !important;
+    height: 300px !important;
+    bottom: -9%;
+    position: absolute;
+    left: -5%;
+    z-index: -1;
+    opacity: .5;
+  }
+}
+
+
+
+
+/* RIGHT: true vertical centering + controlled spacing */
+.homepage-dark-blue.dark-blue-image-left .wp-block-media-text__content {
+  grid-column: 2 !important;
+
+  /* center vertically with grid, keep left-aligned text */
+  // display: grid !important;
+  align-content: center !important;
+  justify-items: start !important;
+
+  /* site gutters; adjust as needed */
+  // padding-inline: 24px !important;
+  // padding-block: 0 !important;
+
+  /* critical to allow centering, prevents min-content overflow */
+  min-height: 0 !important;
+  overflow: hidden;
+
+  /* replace default element margins with a single gap */
+  gap: 16px !important;
+}
+
 
 .yellow-image-right {
   &::before {

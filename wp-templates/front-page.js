@@ -80,7 +80,7 @@ export default function Component() {
 
           <HomepageNonProfit />
 
-
+{/* 
           <section className="cta">
             <CTA
               Button={() => (
@@ -95,7 +95,7 @@ export default function Component() {
                 requirements.
               </span>
             </CTA>
-          </section>
+          </section> */}
 
 
         </div>
