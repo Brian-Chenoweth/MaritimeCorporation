@@ -28,6 +28,9 @@ export default function Footer({
   return (
     <>
       <footer className={cx('footer')}>
+
+        <div className={cx('footer-inner')}>
+
         <div className={cx('container', styles.footerWrap)}>
           <div className={cx('footer-nav-contact-info')}>
 
@@ -144,6 +147,12 @@ export default function Footer({
             &copy; {new Date().getFullYear()} {siteTitle ?? 'California Polytechnic State University'}
           </div>
         </div>
+
+         <div className={cx('footer-mountains')}></div>
+
+        </div>
+
+
       </footer>
     </>
   );
