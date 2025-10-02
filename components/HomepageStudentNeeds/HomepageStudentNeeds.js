@@ -1,10 +1,10 @@
 import Image from 'next/image';
-import Link from 'next/link';
 
-import styles from './HomepageStudentNeeds.module.scss';
 import {
   Button,
 } from 'components';
+
+import styles from './HomepageStudentNeeds.module.scss';
 
 export default function HomepageStudentNeeds() {
   return (
