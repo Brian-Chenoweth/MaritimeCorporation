@@ -1,0 +1,33 @@
+import Image from 'next/image';
+import Link from 'next/link';
+
+import styles from './HomepageStudentNeeds.module.scss';
+
+export default function HomepageStudentNeeds() {
+  return (
+    <div className={styles.cta}>
+          <div className="wp-block-media-text has-media-on-the-left is-stacked-on-mobile yellow-image-left dark-blue-image-left">
+            <div className="wp-block-media-text__content">
+              <h2 className="wp-block-heading">Supporting Student Needs</h2>
+              <p>Through enterprise services like Keelhauler Shops and event coordination, Cal Maritime Corporation provides essential resources for students, cadets, faculty and visitors alike. From branded gear to facility rentals and conference planning, our Commercial Services operations generate revenue that directly benefits the university while keeping vital services running smoothly.</p>
+              <p>
+                <Link legacyBehavior href="#">
+                  <a title="Keelhauler Shops">
+                    Keelhauler Shops
+                  </a>
+                </Link>
+              </p>
+            </div>
+            <figure className="wp-block-media-text__media">
+              <Image
+                src="/home/cal-poly-students-packaging-chocolate-production-lab.jpg"
+                width={980}
+                height={630}
+                alt="Cal Poly students in hairnets and gloves packaging chocolate bars on trays in a food production lab."
+                layout="responsive"
+              />
+            </figure>
+          </div>
+    </div>
+  );
+}

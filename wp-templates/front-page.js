@@ -12,6 +12,7 @@ import {
   NavigationMenu,
   HomepageCampusLife,
   HomepageNonProfit,
+  HomepageStudentNeeds,
   HomepageIntro,
   SEO,
   Header,
@@ -59,6 +60,8 @@ export default function Component() {
 
          <HomepageCampusLife />
 
+         <HomepageStudentNeeds/>
+
          
           
           {/* <section className="hero text-center">
@@ -76,6 +79,7 @@ export default function Component() {
           </section> */}
 
           <HomepageNonProfit />
+
 
           <section className="cta">
             <CTA

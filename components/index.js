@@ -9,6 +9,7 @@ import Header from './Header';
 import HomepageCampusLife from './HomepageCampusLife';
 import HomepageIntro from './HomepageIntro';
 import HomepageNonProfit from './HomepageNonProfit';
+import HomepageStudentNeeds from './HomepageStudentNeeds';
 import LoadMore from './LoadMore';
 import Main from './Main';
 import NavigationMenu from './NavigationMenu/NavigationMenu';
@@ -38,6 +39,7 @@ export {
   Header,
   HomepageCampusLife,
   HomepageNonProfit,
+  HomepageStudentNeeds,
   HomepageIntro,
   LoadMore,
   Main,
