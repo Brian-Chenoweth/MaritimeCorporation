@@ -5,88 +5,88 @@
   margin-top: 155px;
 }
 
-/* image wrapper must be positioning context */
 .image {
   position: relative;
   display: block;
   min-height: 315px;
 
-  figure { margin: 0; min-height: 315px; object-fit: cover; }
-  figure img { min-height: 315px; object-fit: cover; }
+  figure {
+     margin: 0;
+     min-height: 315px;
+     object-fit: cover; 
+    }
+
+  figure img { 
+    min-height: 315px;
+    object-fit: cover; 
+  }
+
 }
 
-/* 🔐 overlay fills the image; H1 will be aligned by the inner .container */
 .overlay {
   position: absolute;
   inset: 0;
   z-index: 2;
-  pointer-events: none;              /* overlay shouldn’t block links */
-  display: flex;                     /* let us vertically position easily */
-  align-items: center;               /* center vertically; tweak as needed */
+  pointer-events: none;
+  display: flex; 
+  align-items: center;
   background-color: rgba(0,0,0,.4);
+  @media screen and (max-width: 767px) {
+    bottom: 10px;
+  }
 }
 
-/* make the container inside overlay occupy height so flex works */
 .overlay > .container {
   width: 100%;
   display: flex;
-  align-items: center;               /* center vertically within overlay */
+  align-items: center;
 }
 
-/* the H1 itself uses normal flow inside the container, so left edge matches nav */
 .heading-home {
-  position: static;                  /* ⬅️ important: no absolute here */
+  position: static;
   margin: 0;
-  // line-height: 1.05;
   text-align: left;
   letter-spacing: 2px;
-  // font-weight: 800;
   text-transform: uppercase;
-  /* responsive size – adjust if you like */
-  // font-size: clamp(2.5rem, 8vw, 6rem);
-  pointer-events: auto;              /* allow text selection if you want */
+  pointer-events: auto;
 }
 
-/* keep existing blocks if you still use them elsewhere */
 .text,
 .image { margin: auto; text-align: center; }
 .text { width: 100%; }
 .title { line-height: 1em; font-weight: 700; }
 .byline { font-weight: $font-weight-bold; font-size: 1.2rem; text-transform: uppercase; }
 
-/* optional layering to ensure image sits under overlay */
+
 .featured-image { margin: 0; position: relative; z-index: 1; }
 
 
 .heading-home {
-  position: relative;   /* anchor for before/after */
+  position: relative;
   display: inline-block;
   margin: 0;
   line-height: 1.05;
   text-transform: uppercase;
   text-align: left;
   width: 100%;
-  // font-weight: 800;
-  // font-size: clamp(2.5rem, 8vw, 6rem);
-
-  /* top rule */
+  
   &::before {
     content: "";
     position: absolute;
     left: 0;
-    top: -25px;              /* adjust spacing above */
-    width: 200px;            /* set exact width */
-    height: 3px;             /* thickness */
-    background: #C69214;     /* gold */
+    top: -25px; 
+    width: 200px; 
+    height: 3px;  
+    background: #C69214;  
   }
 
-  /* bottom rule */
+  
   &::after {
     content: "";
     position: absolute;
     left: 0;
-    bottom: -25px;           /* adjust spacing below */
-    width: 200px;            /* can match top or differ */
+    bottom: -25px;   
+    width: 200px;  
     height: 3px;
     background: #C69214;
   }
