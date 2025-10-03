@@ -454,17 +454,25 @@
 
   figure.wp-block-media-text__media {
     height: 100%;
-    width: 50%;
+    width: 100%;
+    @media (min-width: $breakpoint-small) {
+      width: 50%;
+    }
   }
 
   .wp-block-media-text__content {
+    @media (min-width: $breakpoint-small) {
+      width: 50%;
+      align-items: center;
+      text-align: center !important;
+    }
+    width: 100%;
     padding: 5% !important;
-    width: 50%;
     padding: 5% 8% 5% 5% !important;
-    text-align: center !important;
+    // text-align: center !important;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
   }
 
 }
@@ -481,13 +489,21 @@
   display: grid !important;
   // grid-template-columns: 1fr 1400px !important; /* left bleed, right container */
   align-items: stretch;
-  height: 600px;             
-  max-height: 600px;
+  // height: 600px;             
+  // max-height: 600px;
   overflow: hidden;          
   display: flex !important;
   justify-content: center;
   align-items: center;
   flex-flow: row-reverse;
+  flex-direction: column-reverse;
+
+  @media (min-width: $breakpoint-small) {
+    height: 600px;             
+    max-height: 600px;
+    flex-direction: row-reverse
+  }
+
 }
 
 
@@ -500,12 +516,12 @@
   padding: 0 24px;              /* your gutter */
   min-height: 0;                /* allow flex child to shrink */
   overflow: hidden;      
-  height: 600px;  
+  // height: 600px;  
   position: relative;     /* don’t let inner margins blow height */
+  @media (min-width: $breakpoint-small) {
+    height: 600px;  
+  }
   img {
-    // color: transparent;
-    // width: 100%;
-    // height: auto;
     width: 300px !important;
     height: 300px !important;
     bottom: -9%;

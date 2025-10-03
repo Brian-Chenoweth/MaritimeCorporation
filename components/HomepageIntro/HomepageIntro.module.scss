@@ -2,18 +2,23 @@
 
 
 .homeIntro {
-  padding: 10rem 0 !important;
+  padding: 4rem 0 !important;
+  @media (min-width: $breakpoint-small) {
+    padding: 10rem 0 !important;
+  }
 }
 
 .content {
   p {
-    text-align: center;
     font-family: "utopia-std-display", serif;
-    font-size: 2.45rem;
     font-style: normal;
     font-weight: 400;
-    line-height: 3.85rem;
     color: var(--color-primary);
+    @media (min-width: $breakpoint-small) {
+      font-size: 2.45rem;
+      line-height: 3.85rem;
+      text-align: center;
+    }
   }
 }
 
@@ -35,15 +40,19 @@
 
   @media (max-width: $breakpoint-small) {
     grid-template-columns: 1fr;
+    margin: 3rem 0 0 0;
+    grid-gap: 2rem;
   }
   
   p {
     margin: 0;
     color: var(--color-primary);
     font-family: "utopia-std-display", serif;
-    font-size: 2.15rem;
     font-weight: 400;
-    line-height: 3.25rem;
+     @media (min-width: $breakpoint-small) {
+        font-size: 2.15rem;
+        line-height: 3.25rem;
+     }
   }
 
 }
