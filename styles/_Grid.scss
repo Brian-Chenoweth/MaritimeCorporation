@@ -596,8 +596,11 @@
   margin: 2rem 0;
 
   summary {
+    @media (min-width: $breakpoint-small) {
+      font-size: 1.875rem;
+    }
+    font-size: 1.8rem;
     font-family: 'Source Sans Pro', Helvetica, Arial, Lucida, sans-serif;
-    font-size: 1.875rem;
     font-weight: 600;
     padding:0;
     // width: 100%;
