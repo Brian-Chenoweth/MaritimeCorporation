@@ -11,13 +11,13 @@
 
   &.scrolled {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    height: 76px;
+    height: 65px;
   }
 }
 
 .logo-wrap {
   transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
-  padding: 1rem 0;
+  padding: .4rem 0;
   background-color: var(--color-primary);
 
   &.scrolled {
@@ -36,7 +36,7 @@
   }
 
   &.scrolled {
-    transform: translateY(-76px);
+    transform: translateY(-55px);
   }
 }
 
@@ -44,12 +44,12 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  padding: 1.25rem 0;
+  padding: .5rem 0;
   gap: 2rem;
 }
 
 .logo {
-  width: 200px;
+  width: 160px;
   height: auto;
 }
 
