@@ -202,6 +202,8 @@
 
 
 .intro-text {
+  max-width: 1200px;
+  margin: 0 auto;
   @media (min-width: $breakpoint-small) {
     text-align: center;
     // padding: 6rem 0 4rem 0;
