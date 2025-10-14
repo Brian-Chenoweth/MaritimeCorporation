@@ -296,6 +296,13 @@
        content: '\f061';
        color: #BD8B13;
        margin-right: .5rem;
+       transition: all .3s;
+    }
+    &:hover{
+      &:before {
+        transform: translateX(4px);
+        transition: all .3s;
+      }
     }
   }
 
