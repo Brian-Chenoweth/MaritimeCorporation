@@ -3,14 +3,11 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
 export default function NavigationMenu({ menuItems, className, children }) {
-  // ✅ Hooks must be called unconditionally and in the same order
+  // Always call hooks unconditionally
   const navRef = useRef(null);
   const [openIds, setOpenIds] = useState(() => new Set());
 
-  // Early exit is fine **after** hooks have been called
-  if (!menuItems || menuItems.length === 0) {
-    return null;
-  }
+  const hasMenu = Array.isArray(menuItems) && menuItems.length > 0;
 
   const isOpen = (id) => openIds.has(id);
   const toggle = (id) =>
@@ -37,6 +34,9 @@ export default function NavigationMenu({ menuItems, className, children }) {
       document.removeEventListener('keydown', onEsc);
     };
   }, []);
+
+  // If there's no menu, bail out AFTER hooks have been called
+  if (!hasMenu) return null;
 
   // Convert flat list to tree structure
   const buildMenuTree = (items) => {
