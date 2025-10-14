@@ -3,12 +3,14 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
 export default function NavigationMenu({ menuItems, className, children }) {
-  if (!menuItems) {
-    return null;
-  }
-
+  // ✅ Hooks must be called unconditionally and in the same order
   const navRef = useRef(null);
   const [openIds, setOpenIds] = useState(() => new Set());
+
+  // Early exit is fine **after** hooks have been called
+  if (!menuItems || menuItems.length === 0) {
+    return null;
+  }
 
   const isOpen = (id) => openIds.has(id);
   const toggle = (id) =>
@@ -40,11 +42,9 @@ export default function NavigationMenu({ menuItems, className, children }) {
   const buildMenuTree = (items) => {
     const map = {};
     const roots = [];
-
     items.forEach((item) => {
       map[item.id] = { ...item, children: [] };
     });
-
     items.forEach((item) => {
       if (item.parentId && map[item.parentId]) {
         map[item.parentId].children.push(map[item.id]);
@@ -52,15 +52,13 @@ export default function NavigationMenu({ menuItems, className, children }) {
         roots.push(map[item.id]);
       }
     });
-
     return roots;
   };
 
-  const renderMenuItems = (items) => {
-    return items.map((item) => {
+  const renderMenuItems = (items) =>
+    items.map((item) => {
       const hasChildren = item.children?.length > 0;
       const open = isOpen(item.id);
-
       return (
         <li
           key={item.id ?? ''}
@@ -68,12 +66,10 @@ export default function NavigationMenu({ menuItems, className, children }) {
         >
           {hasChildren ? (
             <>
-              {/* Keep as <a> via Next <Link>; intercept click to toggle */}
               <Link
                 href={item.path ?? ''}
                 onClick={(e) => {
-                  // toggle submenu instead of navigating
-                  e.preventDefault();
+                  e.preventDefault(); // toggle instead of navigating
                   toggle(item.id);
                 }}
                 aria-expanded={open ? 'true' : 'false'}
@@ -89,7 +85,6 @@ export default function NavigationMenu({ menuItems, className, children }) {
         </li>
       );
     });
-  };
 
   const menuTree = buildMenuTree(menuItems);
 
