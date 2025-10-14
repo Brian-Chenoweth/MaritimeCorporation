@@ -11,7 +11,7 @@ export default function HomepageCampusLife() {
               <h2 className="wp-block-heading">  <span className='gold'>Improving</span> Campus Life</h2>
               <p>Our work directly impacts the lives and campus experience of all students, cadets, faculty and staff member. Whether it’s through our support of research projects, student enterprises, delicious dining options, affordable textbooks or spirited memorabilia our work helps to enhance the academy and drive the university forward.</p>
               <p>
-                <Link legacyBehavior href="/commercial-services/">
+                <Link legacyBehavior href="https://maritime-archive.calpoly.edu/corporation/" target='_blank' rel='noopener noreferrer'>
                   <a title="Commercial Services">
                     Commercial Services
                   </a>
