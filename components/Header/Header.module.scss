@@ -152,7 +152,7 @@
     li {
   position: relative;
 
-  &:hover > ul,
+  // &:hover > ul,
   &:focus-within > ul {
     opacity: 1;
     visibility: visible;
@@ -213,7 +213,7 @@
         }
       }
 
-      &:hover > ul,
+      // &:hover > ul,
       &:focus-within > ul {
         opacity: 1;
         visibility: visible;
@@ -279,5 +279,8 @@
         }
       }
     }
+    
   }
 }
+
+

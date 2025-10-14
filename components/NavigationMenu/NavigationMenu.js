@@ -1,10 +1,40 @@
 import { gql } from '@apollo/client';
 import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
 
 export default function NavigationMenu({ menuItems, className, children }) {
   if (!menuItems) {
     return null;
   }
+
+  const navRef = useRef(null);
+  const [openIds, setOpenIds] = useState(() => new Set());
+
+  const isOpen = (id) => openIds.has(id);
+  const toggle = (id) =>
+    setOpenIds((prev) => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
+    });
+  const closeAll = () => setOpenIds(new Set());
+
+  // Close on outside click + Esc
+  useEffect(() => {
+    const onDocClick = (e) => {
+      if (!navRef.current) return;
+      if (!navRef.current.contains(e.target)) closeAll();
+    };
+    const onEsc = (e) => {
+      if (e.key === 'Escape') closeAll();
+    };
+    document.addEventListener('click', onDocClick);
+    document.addEventListener('keydown', onEsc);
+    return () => {
+      document.removeEventListener('click', onDocClick);
+      document.removeEventListener('keydown', onEsc);
+    };
+  }, []);
 
   // Convert flat list to tree structure
   const buildMenuTree = (items) => {
@@ -29,13 +59,33 @@ export default function NavigationMenu({ menuItems, className, children }) {
   const renderMenuItems = (items) => {
     return items.map((item) => {
       const hasChildren = item.children?.length > 0;
+      const open = isOpen(item.id);
+
       return (
         <li
           key={item.id ?? ''}
-          className={hasChildren ? 'hasChildren' : undefined}
+          className={`${hasChildren ? 'hasChildren' : ''} ${open ? 'open' : ''}`.trim() || undefined}
         >
-          <Link href={item.path ?? ''}>{item.label ?? ''}</Link>
-          {hasChildren && <ul>{renderMenuItems(item.children)}</ul>}
+          {hasChildren ? (
+            <>
+              {/* Keep as <a> via Next <Link>; intercept click to toggle */}
+              <Link
+                href={item.path ?? ''}
+                onClick={(e) => {
+                  // toggle submenu instead of navigating
+                  e.preventDefault();
+                  toggle(item.id);
+                }}
+                aria-expanded={open ? 'true' : 'false'}
+                aria-haspopup="true"
+              >
+                {item.label ?? ''}
+              </Link>
+              <ul className={open ? 'visible' : undefined}>{renderMenuItems(item.children)}</ul>
+            </>
+          ) : (
+            <Link href={item.path ?? ''}>{item.label ?? ''}</Link>
+          )}
         </li>
       );
     });
@@ -45,6 +95,7 @@ export default function NavigationMenu({ menuItems, className, children }) {
 
   return (
     <nav
+      ref={navRef}
       className={className}
       role="navigation"
       aria-label={`${menuItems[0]?.menu?.node?.name ?? 'Main'} menu`}
