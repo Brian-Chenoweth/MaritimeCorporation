@@ -3,6 +3,7 @@ import { gql } from '@apollo/client';
 import Link from 'next/link';
 import { useEffect, useRef, useState, forwardRef } from 'react';
 import classNames from 'classnames/bind';
+
 import styles from './NavigationMenu.module.scss';
 
 const cx = classNames.bind(styles);
