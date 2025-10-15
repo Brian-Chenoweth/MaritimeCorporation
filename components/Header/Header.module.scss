@@ -105,7 +105,7 @@
   }
 
   :global(.menu > li > a) {
-    text-transform: uppercase;
+    // text-transform: uppercase;
   }
 
 
@@ -143,6 +143,8 @@
 
     }
 
+    
+
 
 
 @media (min-width: $breakpoint-small) {
@@ -151,6 +153,8 @@
 
     li {
   position: relative;
+      display: flex;
+      align-items: center;
 
   // &:hover > ul,
   &:focus-within > ul {
@@ -177,6 +181,7 @@
     transform: translateY(6px);
     transition: opacity 0.2s ease, transform 0.2s ease;
     z-index: 1000;
+    top: 5rem;
 
     li {
       position: relative;
@@ -188,7 +193,7 @@
         white-space: nowrap;
 
         &:hover {
-          background-color: #dbe4dd;
+          color: black;
         }
       }
 
@@ -237,6 +242,7 @@
       color: var(--color-primary);
 
     }
+
   }
 
 }
@@ -247,40 +253,116 @@
 
 @media screen and (max-width: 767px) {
   .primary-navigation {
+    position: relative;
+    z-index: 1001;
+    
+
     :global(.menu) {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
       height: auto;
-      li {
-        width: 100% !important;
-        ul {
-          position: relative;
-          visibility: visible;
-          opacity: 1;
-          li {
-            width: 100% !important;
-            ul {
-              position: relative;
-              visibility: visible;
-              opacity: 1;
-            }
-          }
-        }
+
+      button {
+        background-color: white;
+        border: 0;
+        width: 100%;
+        font-weight: 600;
+        color: var(--color-primary);
+        padding: 0;
       }
-      :global(li.hasChildren) {
-        // display: none;
-        ul {
-          display: none;
-          opacity: 0;
-        }
-        &:hover {
-         > ul {
-            display: block;
-            opacity: 1;
-          }
-        }
+
+      /* undo desktop “full-height rows” */
+      :global(li), :global(a) { height: auto !important; }
+
+      /* each li is a full-width row */
+      li {
+        position: static;
+        width: 100% !important;
+        align-items: stretch;
+      }
+
+      /* row: link + caret */
+      :global(.item-row) {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        min-height: 48px;         /* finger target */
+        padding: 0 1rem;
+      }
+
+      :global(.item-link) {
+        flex: 1 1 auto;
+        padding: 0;               /* row provides padding */
+        text-decoration: none;
+        color: var(--color-primary);
+      }
+
+      /* kill desktop hover/focus reveal on mobile */
+      li:hover > ul,
+      li:focus-within > ul {
+        // display: none !important;
+        // opacity: 0 !important;
+        // visibility: hidden !important;
+        // transform: none !important;
+      }
+
+      /* submenus are static + collapsed by default */
+      li > ul {
+        // position: static !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        background: white;
+
+        // max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        visibility: hidden;
+        transform: none;
+        transition: max-height .25s ease, opacity .2s ease, visibility .2s ease;
+      }
+
+      /* open via JS (.open on the li) */
+      li.open > ul {
+        max-height: 1000px;       /* big enough for contents */
+        opacity: 1;
+        visibility: visible;
+        display: block;
       }
     }
-    
   }
 }
 
 
+@media screen and (max-width: 767px) {
+  .primary-navigation {
+    :global(.menu) {
+      /* each item row full width */
+      li,
+      li > *,
+      li > button,
+      li > a {
+        width: 100% !important;
+        display: block !important;
+        justify-content: flex-start !important;
+      }
+
+      /* ensure parent container doesn’t constrain width */
+      width: 100% !important;
+      align-items: stretch !important;
+
+      /* kill flex from desktop */
+      display: block !important;
+      flex-direction: column !important;
+
+      /* accordion spacing */
+      li { margin: 0 !important; padding: 0 !important; }
+      li > button { text-align: left; }
+    }
+  }
+}

@@ -1,12 +1,38 @@
+// NavigationMenu.jsx
 import { gql } from '@apollo/client';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, forwardRef } from 'react';
+import classNames from 'classnames/bind';
+import styles from './NavigationMenu.module.scss';
 
-export default function NavigationMenu({ menuItems, className, children }) {
-  // Always call hooks unconditionally
+const cx = classNames.bind(styles);
+
+function useIsMobile(breakpoint = 767) {
+  const [isMobile, set] = useState(false);
+  useEffect(() => {
+    const mql = window.matchMedia(`(max-width: ${breakpoint}px)`);
+    const onChange = () => set(mql.matches);
+    onChange();
+    mql.addEventListener?.('change', onChange);
+    return () => mql.removeEventListener?.('change', onChange);
+  }, [breakpoint]);
+  return isMobile;
+}
+
+const NavigationMenu = forwardRef(function NavigationMenu(
+  { menuItems, className, children, ...rest },
+  forwardedRef
+) {
+  const isMobile = useIsMobile(767);
+
   const navRef = useRef(null);
-  const [openIds, setOpenIds] = useState(() => new Set());
+  const setRefs = (el) => {
+    navRef.current = el;
+    if (typeof forwardedRef === 'function') forwardedRef(el);
+    else if (forwardedRef) forwardedRef.current = el;
+  };
 
+  const [openIds, setOpenIds] = useState(() => new Set());
   const hasMenu = Array.isArray(menuItems) && menuItems.length > 0;
 
   const isOpen = (id) => openIds.has(id);
@@ -16,9 +42,11 @@ export default function NavigationMenu({ menuItems, className, children }) {
       next.has(id) ? next.delete(id) : next.add(id);
       return next;
     });
+  const toggleMobileExclusive = (id) =>
+    setOpenIds((prev) => (prev.has(id) ? new Set() : new Set([id])));
+
   const closeAll = () => setOpenIds(new Set());
 
-  // Close on outside click + Esc
   useEffect(() => {
     const onDocClick = (e) => {
       if (!navRef.current) return;
@@ -35,22 +63,16 @@ export default function NavigationMenu({ menuItems, className, children }) {
     };
   }, []);
 
-  // If there's no menu, bail out AFTER hooks have been called
   if (!hasMenu) return null;
 
-  // Convert flat list to tree structure
+  // flat -> tree
   const buildMenuTree = (items) => {
     const map = {};
     const roots = [];
+    items.forEach((item) => (map[item.id] = { ...item, children: [] }));
     items.forEach((item) => {
-      map[item.id] = { ...item, children: [] };
-    });
-    items.forEach((item) => {
-      if (item.parentId && map[item.parentId]) {
-        map[item.parentId].children.push(map[item.id]);
-      } else {
-        roots.push(map[item.id]);
-      }
+      if (item.parentId && map[item.parentId]) map[item.parentId].children.push(map[item.id]);
+      else roots.push(map[item.id]);
     });
     return roots;
   };
@@ -59,28 +81,71 @@ export default function NavigationMenu({ menuItems, className, children }) {
     items.map((item) => {
       const hasChildren = item.children?.length > 0;
       const open = isOpen(item.id);
+      const submenuId = `submenu-${item.id}`;
+
+      // MOBILE: whole row toggles; parent link moved inside submenu as "Overview"
+      if (isMobile && hasChildren) {
+        return (
+          <li key={item.id ?? ''} className={cx({ hasChildren, open })}>
+            <button
+              type="button"
+              className={cx('item-row', 'row-button', { open })}
+              aria-expanded={open}
+              aria-controls={submenuId}
+              onClick={() => toggleMobileExclusive(item.id)}
+            >
+              <span className={cx('row-label')}>{item.label ?? ''}</span>
+              <i className={cx('fa-solid', 'fa-chevron-down')} aria-hidden="true" />
+            </button>
+
+            <ul id={submenuId} className={cx('mobile-submenu', { open })}>
+              {/* explicit parent link lives inside submenu */}
+              <li>
+                <Link href={item.path ?? ''} className={cx('item-link', 'overview')}>
+                  Overview
+                </Link>
+              </li>
+              {renderMenuItems(item.children)}
+            </ul>
+          </li>
+        );
+      }
+
+      // DESKTOP (and mobile leaf nodes): link navigates, caret toggles
       return (
-        <li
-          key={item.id ?? ''}
-          className={`${hasChildren ? 'hasChildren' : ''} ${open ? 'open' : ''}`.trim() || undefined}
-        >
+        <li key={item.id ?? ''} className={cx({ hasChildren, open })}>
           {hasChildren ? (
             <>
-              <Link
-                href={item.path ?? ''}
-                onClick={(e) => {
-                  e.preventDefault(); // toggle instead of navigating
-                  toggle(item.id);
-                }}
-                aria-expanded={open ? 'true' : 'false'}
-                aria-haspopup="true"
-              >
-                {item.label ?? ''}
-              </Link>
-              <ul className={open ? 'visible' : undefined}>{renderMenuItems(item.children)}</ul>
+              <div className={cx('item-row')}>
+                <Link href={item.path ?? ''} className={cx('item-link')}>
+                  {item.label ?? ''}
+                </Link>
+                <button
+                  type="button"
+                  className={cx('submenu-toggle', { open })}
+                  aria-expanded={open}
+                  aria-haspopup="true"
+                  aria-controls={submenuId}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggle(item.id);
+                  }}
+                >
+                  <span className={cx('visually-hidden')}>
+                    {open ? 'Collapse' : 'Expand'} {item.label}
+                  </span>
+                  <i className={cx('fa-solid', 'fa-chevron-down')} aria-hidden="true" />
+                </button>
+              </div>
+              <ul id={submenuId} className={cx('submenu', { visible: open })}>
+                {renderMenuItems(item.children)}
+              </ul>
             </>
           ) : (
-            <Link href={item.path ?? ''}>{item.label ?? ''}</Link>
+            <Link href={item.path ?? ''} className={cx('item-link')}>
+              {item.label ?? ''}
+            </Link>
           )}
         </li>
       );
@@ -90,18 +155,19 @@ export default function NavigationMenu({ menuItems, className, children }) {
 
   return (
     <nav
-      ref={navRef}
-      className={className}
+      ref={setRefs}
+      className={cx(className, { mobile: isMobile })}
       role="navigation"
       aria-label={`${menuItems[0]?.menu?.node?.name ?? 'Main'} menu`}
+      {...rest}
     >
-      <ul className="menu">
+      <ul className={cx('menu', { 'menu-mobile': isMobile })}>
         {renderMenuItems(menuTree)}
         {children}
       </ul>
     </nav>
   );
-}
+});
 
 NavigationMenu.fragments = {
   entry: gql`
@@ -119,3 +185,5 @@ NavigationMenu.fragments = {
     }
   `,
 };
+
+export default NavigationMenu;
