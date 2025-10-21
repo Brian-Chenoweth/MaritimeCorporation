@@ -531,13 +531,17 @@
     height: 600px;  
   }
   img {
-    width: 300px !important;
-    height: 300px !important;
-    bottom: -9%;
+    // width: 300px !important;
+    // height: 300px !important;
+    width: clamp(200px, 20vw, 500px) !important;
+    // bottom: -12%;
     position: absolute;
-    left: -5%;
-    z-index: -1;
-    opacity: .5;
+    // left: -7%;
+    z-index: 9;
+    opacity: .25;
+
+    left: clamp(-90px, -5vw, -40px);
+    bottom: clamp(-90px, -5vw, -40px);
   }
 }
 
@@ -547,6 +551,8 @@
 /* RIGHT: true vertical centering + controlled spacing */
 .homepage-dark-blue.dark-blue-image-left .wp-block-media-text__content {
   grid-column: 2 !important;
+  // background-color: pink;
+  background: linear-gradient(35deg, #013e70 35%, #0067b9 80%);
 
   /* center vertically with grid, keep left-aligned text */
   // display: grid !important;
