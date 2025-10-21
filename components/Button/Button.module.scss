@@ -34,4 +34,8 @@
     outline: 1px dotted;
     outline: 1px auto -webkit-focus-ring-color;
   }
+
+  &:before {
+    display: none !important;
+  }
 }
