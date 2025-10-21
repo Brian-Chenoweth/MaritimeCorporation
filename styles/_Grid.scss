@@ -285,9 +285,9 @@
     font-weight: 700;
     text-transform: uppercase;
     text-decoration: none;
-    &:hover {
-      color: var(--color-secondary);
-    }
+    // &:hover {
+    //   color: var(--color-secondary);
+    // }
     &::before {
       font-family: 'Font Awesome 6 Free';
       display: inline-block;

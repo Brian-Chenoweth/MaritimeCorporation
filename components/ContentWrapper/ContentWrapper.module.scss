@@ -12,9 +12,10 @@
     font-weight: 700;
     text-transform: uppercase;
     text-decoration: none !important;
-    &:hover {
-      color: var(--color-secondary) !important;
-    }
+    // &:hover {
+    //   color: var(--color-secondary) !important;
+    // }
+    transition: all .3s;
     &::before {
       font-family: 'Font Awesome 6 Free';
       display: inline-block;
@@ -23,6 +24,13 @@
        content: '\f061';
        color: $gold;
        margin-right: .5rem;
+       transition: all .3s;
+    }
+    &:hover{
+      &:before {
+        transform: translateX(4px);
+        transition: all .3s;
+      }
     }
   }
 
