@@ -1,3 +1,5 @@
+@import 'styles/Variables';
+
 .submenu-toggle { 
     
     background-color: transparent;
@@ -6,7 +8,7 @@
     margin-right: 10px;
     margin-left: -5px;
     padding: 0;
-    color: #BD8B13;
+    color: $gold;
     font-weight: 900;
 
 
@@ -14,9 +16,6 @@
         display: none;
     }
 
-    .fa-chevron-down:before {
-        // color: pink;
-    }
 
 }
 

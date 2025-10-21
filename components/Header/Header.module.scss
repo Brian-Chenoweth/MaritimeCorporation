@@ -60,12 +60,12 @@
   letter-spacing: 0;
   font-size: 3.2rem;
   display: inline-block;
-  text-decoration-color: #BD8B13;
+  text-decoration-color: $gold;
   transition: all 0.4s;
 
   &:hover {
     text-decoration: underline;
-    text-decoration-color: #BD8B13;
+    text-decoration-color: $gold;
   }
 }
 
@@ -130,7 +130,7 @@
       display: inline-block;
       text-rendering: auto;
       -webkit-font-smoothing: antialiased;
-      color: #BD8B13;
+      color: $gold;
       margin-left: 0.5rem;
     }
 

@@ -235,7 +235,7 @@
       text-rendering: auto;
       -webkit-font-smoothing: antialiased;
        content: '\f061';
-       color: #BD8B13;
+       color: $gold;
        margin-right: .5rem;
     }
   }
@@ -294,7 +294,7 @@
       text-rendering: auto;
       -webkit-font-smoothing: antialiased;
        content: '\f061';
-       color: #BD8B13;
+       color: $gold;
        margin-right: .5rem;
        transition: all .3s;
     }
@@ -662,16 +662,13 @@
     font-weight: 700;
     // text-transform: uppercase;
     text-decoration: none;
-    &:hover {
-      // text-decoration: 2px solid #BD8B13 underline;
-    }
     &::before {
       font-family: 'Font Awesome 6 Free';
       display: inline-block;
       text-rendering: auto;
       -webkit-font-smoothing: antialiased;
        content: '\f061';
-       color: #BD8B13;
+       color: $gold;
        margin-right: .5rem;
     }
   }
