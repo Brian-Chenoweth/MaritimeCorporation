@@ -191,6 +191,8 @@
     text-decoration: underline;
     text-underline-offset: 5px;
     transition: all .4s;
+    font-weight: 600;
+    a {font-weight: 600 !important;}
 }
 
 .nav-two {
@@ -200,7 +202,10 @@
 
 .nav-one, .nav-two {
     font-family: 'Source Sans Pro', sans-serif;
-    margin-top: 4rem;
+    margin-top: 1rem;
+  @media (min-width: $breakpoint-small) { 
+      margin-left: 7.2rem;
+  }
     @media screen and (max-width: 767px) {
       margin-top: 2rem;
       // font-size: 1.4rem;
@@ -214,8 +219,10 @@
   font-family: "utopia-std-subhead", serif;
   font-weight: 300;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 3rem;
   flex-wrap: wrap;
 
   @media screen and (max-width: 767px) {
@@ -241,7 +248,7 @@
   img {
     max-width: 250px;
     height: auto;
-    margin-right: 2rem;
+    // margin-right: 2rem;
   }
 }
 
@@ -302,6 +309,9 @@
 }
 
 .copyright {
-  margin-top: 4rem;
+  margin-top: 3rem;
+  @media (min-width: $breakpoint-small) { 
+      margin-left: 7.2rem;
+  }
   // font-size: 1.5rem;
 }
