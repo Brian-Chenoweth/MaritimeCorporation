@@ -38,6 +38,8 @@
     font-weight: 400;
     letter-spacing: .2rem;
     font-size: 2.8rem;
+    margin-bottom: .8rem;
+    margin-top: 0 !important;
     @media screen and (max-width: 767px) {
       font-size: 2.2rem;
     }
@@ -80,16 +82,28 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: flex-start;
-@media (min-width: $breakpoint-small) {
-    align-items: flex-end;
-}
+      @media (min-width: $breakpoint-small) {
+          // align-items: flex-end;
+      }
 
       .cppText {
-        padding: 2rem 0 .75rem 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.5);
+        padding: 1.6rem 0 .75rem 0;
+        // border-top: 1px solid rgba(255, 255, 255, 0.5);
         font-family: "utopia-std-display", serif;
         font-weight: 500;
         font-size: 2.75rem;
+        position: relative;
+
+          &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 8rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+          }
+
+
         @media screen and (max-width: 767px) {
           font-size: 1.8rem;
         }
@@ -104,8 +118,9 @@
       .phone {
         margin-bottom: .75rem;
         line-height: 1;
-        font-size: 2rem;
-        font-family: "utopia-std-display", serif;
+        font-size: 1.8rem;
+        // font-family: "utopia-std-display", serif;
+        font-weight: 600;
         @media screen and (max-width: 767px) {
           font-size: 1.8rem;
         }
@@ -283,7 +298,7 @@
 
 .quick ul {
   flex-direction: column;
-  line-height: 3.5rem;
+  line-height: 3.25rem;
 }
 
 .copyright {
