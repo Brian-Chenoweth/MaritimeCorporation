@@ -9,7 +9,10 @@ module.exports = withFaust({
     includePaths: ['node_modules'],
   },
   images: {
-    domains: [getWpHostname()],
+    domains: [
+      getWpHostname(),             
+      'cms.calmaritimecorporation.org',   
+    ],
   },
   i18n: {
     locales: ['en'],
