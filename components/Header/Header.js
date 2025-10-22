@@ -7,7 +7,8 @@ import Link from 'next/link';
 
 import { NavigationMenu, SkipNavigationLink } from '../';
 
-import MobileNav from './MobileNav'; // <-- new
+import MobileNav from './MobileNav';
+
 import styles from './Header.module.scss';
 let cx = classNames.bind(styles);
 
@@ -32,7 +33,6 @@ export default function Header({ className, menuItems }) {
   const headerClasses = cx('header', className, { scrolled: isScrolled });
   const logoWrapClasses = cx('logo-wrap', { scrolled: isScrolled });
   const headerContentClasses = cx('container', 'header-content', { scrolled: isScrolled });
-
   const navClasses = cx('primary-navigation', isNavShown ? cx('show') : undefined);
 
   useEffect(() => {
@@ -46,9 +46,15 @@ export default function Header({ className, menuItems }) {
       <div className={logoWrapClasses}>
         <div className="container">
           <div className={cx('logo')}>
-            <Link legacyBehavior href="/"><a title="Home">
-              <Image src="/logo.png" width={400} height={80} alt="Cal Poly University logo" layout="responsive" />
-            </a></Link>
+            <Link href="/" title="Home">
+              <Image
+                src="/logo.png"
+                width={400}
+                height={80}
+                alt="Cal Poly University logo"
+                layout="responsive"
+              />
+            </Link>
           </div>
         </div>
       </div>
@@ -69,7 +75,6 @@ export default function Header({ className, menuItems }) {
             <FaBars />
           </button>
 
-          {/* Desktop = your current menu. Mobile = simple accordion */}
           {isMobile ? (
             <MobileNav
               className={cx('mobile-nav', { open: isNavShown })}
@@ -77,8 +82,8 @@ export default function Header({ className, menuItems }) {
               onNavigate={() => setIsNavShown(false)}
             >
               <li>
-                <Link legacyBehavior href="/search">
-                  <a><FaSearch title="Search" role="img" /></a>
+                <Link href="/search" title="Search">
+                  <FaSearch title="Search" role="img" />
                 </Link>
               </li>
             </MobileNav>
@@ -90,8 +95,8 @@ export default function Header({ className, menuItems }) {
               ref={menuRef}
             >
               <li>
-                <Link legacyBehavior href="/search">
-                  <a><FaSearch title="Search" role="img" /></a>
+                <Link href="/search" title="Search">
+                  <FaSearch title="Search" role="img" />
                 </Link>
               </li>
             </NavigationMenu>
