@@ -8,7 +8,6 @@ import Link from 'next/link';
 import { NavigationMenu, SkipNavigationLink } from '../';
 
 import MobileNav from './MobileNav'; // <-- new
-
 import styles from './Header.module.scss';
 let cx = classNames.bind(styles);
 
