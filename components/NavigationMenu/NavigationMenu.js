@@ -66,6 +66,18 @@ const NavigationMenu = forwardRef(function NavigationMenu(
 
   if (!hasMenu) return null;
 
+  // helper: build link props (honors WP "open in new tab")
+  const mkLinkProps = (item, extraClass) => {
+    const target = item?.target === '_blank' ? '_blank' : undefined;
+    const rel = target ? 'noopener noreferrer' : undefined;
+    return {
+      href: item?.path ?? '',
+      className: cx('item-link', extraClass),
+      target,
+      rel,
+    };
+  };
+
   // flat -> tree
   const buildMenuTree = (items) => {
     const map = {};
@@ -84,7 +96,6 @@ const NavigationMenu = forwardRef(function NavigationMenu(
       const open = isOpen(item.id);
       const submenuId = `submenu-${item.id}`;
 
-      // MOBILE: whole row toggles; parent link moved inside submenu as "Overview"
       if (isMobile && hasChildren) {
         return (
           <li key={item.id ?? ''} className={cx({ hasChildren, open })}>
@@ -100,11 +111,9 @@ const NavigationMenu = forwardRef(function NavigationMenu(
             </button>
 
             <ul id={submenuId} className={cx('mobile-submenu', { open })}>
-              {/* explicit parent link lives inside submenu */}
+              {/* parent link inside submenu */}
               <li>
-                <Link href={item.path ?? ''} className={cx('item-link', 'overview')}>
-                  Overview
-                </Link>
+                <Link {...mkLinkProps(item, 'overview')}>Overview</Link>
               </li>
               {renderMenuItems(item.children)}
             </ul>
@@ -112,15 +121,12 @@ const NavigationMenu = forwardRef(function NavigationMenu(
         );
       }
 
-      // DESKTOP (and mobile leaf nodes): link navigates, caret toggles
       return (
         <li key={item.id ?? ''} className={cx({ hasChildren, open })}>
           {hasChildren ? (
             <>
               <div className={cx('item-row')}>
-                <Link href={item.path ?? ''} className={cx('item-link')}>
-                  {item.label ?? ''}
-                </Link>
+                <Link {...mkLinkProps(item)}>{item.label ?? ''}</Link>
                 <button
                   type="button"
                   className={cx('submenu-toggle', { open })}
@@ -144,9 +150,7 @@ const NavigationMenu = forwardRef(function NavigationMenu(
               </ul>
             </>
           ) : (
-            <Link href={item.path ?? ''} className={cx('item-link')}>
-              {item.label ?? ''}
-            </Link>
+            <Link {...mkLinkProps(item)}>{item.label ?? ''}</Link>
           )}
         </li>
       );
@@ -178,6 +182,7 @@ NavigationMenu.fragments = {
       label
       parentId
       cssClasses
+      target        # <-- pulls WP "Open link in a new tab" (_blank)
       menu {
         node {
           name
