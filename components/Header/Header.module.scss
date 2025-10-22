@@ -366,3 +366,206 @@
     }
   }
 }
+
+
+
+/* ===========================
+   MOBILE NAV (accordion)
+   =========================== */
+
+.mobile-nav { display: none; }               /* hidden on desktop */
+
+@media (max-width: 767px) {
+  .primary-navigation { display: none !important; } /* hide desktop menu */
+  .mobile-nav { display: block; width: 100%; }
+
+  .mobile-nav .mnav__wrap {
+    background: #fff;
+    border-top: 1px solid rgba(0,0,0,.06);
+  }
+
+  .mobile-nav.open .mnav__wrap { display: block; }
+  .mobile-nav:not(.open) .mnav__wrap { display: none; } /* toggled by header button */
+
+  .mnav__ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .mnav__li {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* row (button or link) */
+  .mnav__row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 52px;
+    padding: 0 1rem;
+    background: #fff;
+    border: 0;
+    text-align: left;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .mnav__link { /* anchor variant shares same visuals */ }
+
+  .mnav__label {
+    display: inline-block;
+    padding-left: calc(var(--indent, 0) * 16px); /* indent by level */
+  }
+
+  .mnav__caret {
+    transition: transform .2s ease;
+  }
+
+  .mnav__li.open .mnav__caret {
+    transform: rotate(-180deg);
+  }
+
+  /* collapsible panel (holds "Overview" + children) */
+  .mnav__panel {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: max-height .25s ease, opacity .2s ease, visibility .2s ease;
+    background: #fff;
+    border-top: 1px solid rgba(0,0,0,.04);
+  }
+
+  .mnav__panel.open {
+    max-height: 1000px;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .mnav__overview {
+    display: block;
+    padding: .75rem 1rem .5rem 1rem;
+    color: var(--color-primary);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  /* child list inside panel */
+  .mnav__panel .mnav__ul {
+    padding-bottom: .5rem;
+  }
+
+  .mnav__panel .mnav__row {
+    min-height: 46px;
+  }
+}
+
+/* Keep desktop behavior untouched */
+@media (min-width: $breakpoint-small) {
+  .mobile-nav { display: none !important; }
+}
+
+/* Add below existing .mnav__panel.open rule */
+
+.mnav__panel .mnav__panel {
+  border-top: 1px solid rgba(0,0,0,.05);
+  background: #fafafa;
+}
+
+.mnav__panel .mnav__row {
+  font-weight: 500;
+  min-height: 44px;
+}
+
+.mnav__panel .mnav__label {
+  padding-left: calc(var(--indent, 0) * 16px + 16px);
+}
+
+/* optional: subtle shading per depth */
+.mnav__li:nth-child(odd) .mnav__panel { background: #fff; }
+.mnav__li:nth-child(even) .mnav__panel { background: #f9f9f9; }
+
+/* === Mobile caret + background fixes (drop-in) === */
+@media (max-width: 767px) {
+  /* Make sure the chevron can rotate */
+  .mnav__caret {
+    display: inline-block;
+    transition: transform .2s ease;
+    transform: rotate(0deg);
+    transform-origin: 50% 50%;
+  }
+
+  /* Stronger selector: rotate when the LI is open */
+  .mnav__li.open > .mnav__row .mnav__caret {
+    transform: rotate(-180deg);
+  }
+
+  /* Normalize backgrounds (buttons/links/panels) */
+  .mnav__row,
+  .mnav__link,
+  .mnav__panel {
+    background: #fff !important;
+  }
+
+  /* Remove native button styles that can tint on iOS */
+  .mnav__row {
+    -webkit-appearance: none;
+    appearance: none;
+    box-shadow: none !important;
+    border: 0;
+  }
+
+  /* Clean borders so you only have subtle separators */
+  .mnav__panel {
+    border-top: 1px solid rgba(0,0,0,.06);
+  }
+
+  /* Indentation stays but panel tinting is removed */
+  .mnav__panel .mnav__panel { background: #fff !important; }
+
+  /* If you added alternating shading earlier, neutralize it */
+  .mnav__li:nth-child(odd) .mnav__panel,
+  .mnav__li:nth-child(even) .mnav__panel {
+    background: #fff !important;
+  }
+}
+
+/* === Caret rotation: only rotate when its own submenu is open === */
+@media (max-width: 767px) {
+  /* make the icon rotatable */
+  .mnav__caret {
+    display: inline-block;
+    transition: transform .25s ease;
+    transform: rotate(0deg);
+    transform-origin: center;
+  }
+
+  /* rotate only when the button's direct panel sibling is open */
+  .mnav__row + .mnav__panel.open > .mnav__ul,
+  .mnav__row + .mnav__panel.open {
+    & ~ .mnav__caret {
+      transform: rotate(-180deg);
+    }
+  }
+
+  /* stronger and simpler fix—use the parent .open state but target only its own caret */
+  .mnav__li.open > .mnav__row .mnav__caret {
+    transform: rotate(-180deg);
+  }
+
+  /* reset deeper levels so their chevrons don't inherit rotation from ancestors */
+  .mnav__li.open .mnav__li:not(.open) > .mnav__row .mnav__caret {
+    transform: rotate(0deg);
+  }
+
+  /* clean white backgrounds for all nested panels */
+  .mnav__row,
+  .mnav__panel,
+  .mnav__link {
+    background: #fff !important;
+  }
+}
