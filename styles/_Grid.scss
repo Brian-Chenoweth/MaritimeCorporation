@@ -222,21 +222,18 @@
     transition: all .3s;
     color: var(--color-primary);
     font-weight: 700;
-    text-transform: uppercase;
+    text-transform: none;
     text-decoration: none;
+    &:hover {
+      color: var(--color-secondary) !important;
+    }
   }
   a.inline {
     text-transform: none;
   }
   a:not(.inline) {
         &::before {
-      font-family: 'Font Awesome 6 Free';
-      display: inline-block;
-      text-rendering: auto;
-      -webkit-font-smoothing: antialiased;
-       content: '\f061';
-       color: $gold;
-       margin-right: .5rem;
+      display: none;
     }
   }
   p {
