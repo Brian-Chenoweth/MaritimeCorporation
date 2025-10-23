@@ -15,6 +15,26 @@ import {
   SEO,
 } from '../components';
 
+import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
+
+// Client-only form to avoid SSR/client mismatch
+const ContactForm = dynamic(() => import('components/ContactForm'), { ssr: false });
+
+const TOKEN = '<!-- FORMSPREE_CONTACT -->';
+const SLOT_HTML = '<div id="contact-form-slot"></div>';
+
+// Portals the ContactForm into the placeholder div after mount.
+function ContactFormIntoSlot() {
+  const [slot, setSlot] = useState(null);
+  useEffect(() => {
+    setSlot(document.getElementById('contact-form-slot'));
+  }, []);
+  if (!slot) return null;
+  return createPortal(<ContactForm />, slot);
+}
+
 export default function Component(props) {
   // Loading state for previews
   if (props.loading) {
@@ -32,6 +52,8 @@ export default function Component(props) {
   const resources    = props?.data?.resourcesFooterMenuItems?.nodes ?? [];
 
   const { title, content, featuredImage } = props?.data?.page ?? { title: '' };
+
+  const htmlWithSlot = (content ?? '').split(TOKEN).join(SLOT_HTML);
 
   return (
     <>
@@ -53,7 +75,8 @@ export default function Component(props) {
         <>
           <EntryHeader title={title} image={featuredImage?.node} />
           <div className="container">
-            <ContentWrapper content={content} />
+            <ContentWrapper content={htmlWithSlot} />
+            <ContactFormIntoSlot />
           </div>
         </>
       </Main>

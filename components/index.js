@@ -1,5 +1,6 @@
 import Button from './Button';
 import ContentWrapper from './ContentWrapper';
+import ContactForm from './ContactForm';
 import CTA from './CTA';
 import EntryHeader from './EntryHeader';
 import FeaturedImage from './FeaturedImage';
@@ -31,6 +32,7 @@ import SearchRecommendations from './SearchRecommendations';
 export {
   Button,
   ContentWrapper,
+  ContactForm,
   CTA,
   EntryHeader,
   FeaturedImage,
