@@ -18,18 +18,18 @@ export default function HomepageIntro() {
         <div className={styles.numbers}>
           
           <div className={styles.numberItem}>
-            <h2><CountUp end={95} duration={5} useEasing={false}/><span  className='blue'>+</span></h2>
-            <p>Years Supporting Cadets</p>
+            <h2><CountUp end={5} duration={2} useEasing={false}/><span  className='blue'>+</span></h2>
+            <p>Years Supporting Cal Poly Maritime Academy</p>
           </div>
 
           <div className={styles.numberItem}>
-            <h2><CountUp end={60}  duration={4.5} useEasing={false}/><span  className='blue'>+</span></h2>
-            <p>Times circumnavigating the globe in Corporation-owned ships</p>
+            <h2><CountUp end={750}  duration={3} useEasing={false}/><span  className='blue'>+</span></h2>
+            <p>Number of Cadets Supported</p>
           </div>
 
           <div className={styles.numberItem}>
-            <h2>$<CountUp end={50}  duration={4} useEasing={false}/> million<span  className='blue'>+</span></h2>
-            <p>Given in support of the academy</p>
+            <h2>$<CountUp end={6.5}  duration={2.5} useEasing={false}/> million<span  className='blue'>+</span></h2>
+            <p>Reinvested in Cal Poly Maritime Academy</p>
           </div>
 
         </div>
