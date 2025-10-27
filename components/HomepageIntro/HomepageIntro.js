@@ -29,7 +29,7 @@ export default function HomepageIntro() {
 
           <div className={styles.numberItem}>
             <h2>$<CountUp end={6.5}  duration={2} useEasing={false} decimals={1}/> million<span  className='blue'>+</span></h2>
-            <p>Reinvested in Cal Poly Maritime Academy</p>
+            <p>Generated Revenue in Support of Cal Poly Maritime Academy</p>
           </div>
 
         </div>
