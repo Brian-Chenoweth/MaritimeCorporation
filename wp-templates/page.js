@@ -77,8 +77,7 @@ export default function Component(props) {
     s?.canonical ||
     (baseUrl && router?.asPath ? `${baseUrl}${router.asPath}` : undefined);
 
-  const noindex =
-    s?.metaRobotsNoindex === 'noindex' || s?.metaRobotsNofollow === 'nofollow';
+
 
   const ogType = s?.opengraphType || 'website';
   const ogSiteName = s?.opengraphSiteName || siteTitle;
@@ -92,7 +91,6 @@ export default function Component(props) {
         url={computedCanonical}
         type={ogType}
         siteName={ogSiteName}
-        noindex={noindex}
       />
 
       <Header
