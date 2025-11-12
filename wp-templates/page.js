@@ -18,6 +18,7 @@ import {
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { useRouter } from 'next/router';
 
 // Client-only form to avoid SSR/client mismatch
 const ContactForm = dynamic(() => import('components/ContactForm'), { ssr: false });
@@ -36,6 +37,8 @@ function ContactFormIntoSlot() {
 }
 
 export default function Component(props) {
+  const router = useRouter();
+
   // Loading state for previews
   if (props.loading) {
     return <>Loading...</>;
@@ -51,21 +54,47 @@ export default function Component(props) {
   const navTwo       = props?.data?.footerTertiaryMenuItems?.nodes ?? [];
   const resources    = props?.data?.resourcesFooterMenuItems?.nodes ?? [];
 
-  const { title, content, featuredImage } = props?.data?.page ?? { title: '' };
+  const page = props?.data?.page ?? { title: '' };
+  const { title, content, featuredImage, seo: s } = page;
 
   const htmlWithSlot = (content ?? '').split(TOKEN).join(SLOT_HTML);
+
+  // ---- Yoast → SEO props with smart fallbacks ----
+  const computedTitle =
+    s?.title ||
+    pageTitle(props?.data?.generalSettings, title, props?.data?.generalSettings?.title);
+
+  const computedDescription =
+    s?.metaDesc || siteDescription || 'Official site for Cal Poly Partners.';
+
+  const computedImageUrl =
+    s?.opengraphImage?.mediaItemUrl ||
+    featuredImage?.node?.sourceUrl ||
+    '/images/og-default.jpg';
+
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  const computedCanonical =
+    s?.canonical ||
+    (baseUrl && router?.asPath ? `${baseUrl}${router.asPath}` : undefined);
+
+  const noindex =
+    s?.metaRobotsNoindex === 'noindex' || s?.metaRobotsNofollow === 'nofollow';
+
+  const ogType = s?.opengraphType || 'website';
+  const ogSiteName = s?.opengraphSiteName || siteTitle;
 
   return (
     <>
       <SEO
-        title={pageTitle(
-          props?.data?.generalSettings,
-          title,
-          props?.data?.generalSettings?.title
-        )}
-        description={siteDescription}
-        imageUrl={featuredImage?.node?.sourceUrl}
+        title={computedTitle}
+        description={computedDescription}
+        imageUrl={computedImageUrl}
+        url={computedCanonical}
+        type={ogType}
+        siteName={ogSiteName}
+        noindex={noindex}
       />
+
       <Header
         title={siteTitle}
         description={siteDescription}
@@ -125,6 +154,18 @@ Component.query = gql`
       title
       content
       ...FeaturedImageFragment
+      seo {
+        title
+        metaDesc
+        canonical
+        opengraphType
+        opengraphSiteName
+        opengraphImage {
+          mediaItemUrl
+        }
+        metaRobotsNoindex
+        metaRobotsNofollow
+      }
     }
     generalSettings {
       ...BlogInfoFragment
@@ -134,7 +175,6 @@ Component.query = gql`
         ...NavigationMenuItemFragment
       }
     }
-
     quickFooterMenuItems: menuItems(where: { location: $quickFooterLocation }, first: 100) {
       nodes { ...NavigationMenuItemFragment }
     }

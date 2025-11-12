@@ -1,0 +1,26 @@
+// src/fragments/Seo.fragment.js (or wherever you keep fragments)
+import { gql } from '@apollo/client';
+
+export const SeoFragment = gql`
+  fragment SeoFragment on SEO {
+    title
+    metaDesc
+    canonical
+    opengraphType
+    opengraphUrl
+    opengraphSiteName
+    opengraphTitle
+    opengraphDescription
+    opengraphImage {
+      mediaItemUrl
+      altText
+    }
+    twitterTitle
+    twitterDescription
+    twitterImage {
+      mediaItemUrl
+    }
+    metaRobotsNoindex
+    metaRobotsNofollow
+  }
+`;
