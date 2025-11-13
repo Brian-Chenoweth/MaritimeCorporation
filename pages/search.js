@@ -16,7 +16,6 @@ import {
 import { BlogInfoFragment } from 'fragments/GeneralSettings';
 import { useState } from 'react';
 import { GetSearchResults } from 'queries/GetSearchResults';
-
 import styles from 'styles/pages/_Search.module.scss';
 import appConfig from 'app.config';
 
