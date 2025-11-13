@@ -3,13 +3,15 @@
   color: var(--color-white);
   padding-top: 4rem;
   padding-bottom: 4rem;
+  text-transform: none;
+  font-size: 7rem;
 }
 
 .search-header-pane {
   background-color: var(--color-primary);
   margin-bottom: 4rem;
   padding-bottom: 4rem;
-  margin-top: -2px; // Just in case there is any whitespace between elements.
+  padding-top: 155px; // Just in case there is any whitespace between elements.
 }
 
 .load-more {

@@ -1,3 +1,4 @@
+// pages/search.js
 import * as MENUS from 'constants/menus';
 
 import { gql, useQuery } from '@apollo/client';
@@ -6,29 +7,25 @@ import {
   Button,
   Header,
   Main,
+  Footer,
   NavigationMenu,
   SearchInput,
   SearchResults,
   SEO,
-  SearchRecommendations,
 } from 'components';
 import { BlogInfoFragment } from 'fragments/GeneralSettings';
 import { useState } from 'react';
 import { GetSearchResults } from 'queries/GetSearchResults';
+
 import styles from 'styles/pages/_Search.module.scss';
 import appConfig from 'app.config';
 
 export default function Page() {
   const [searchQuery, setSearchQuery] = useState('');
 
-  const { data: pageData } = useQuery(Page.query, {
+  const { data: pageData, loading: pageLoading } = useQuery(Page.query, {
     variables: Page.variables(),
   });
-
-  const { title: siteTitle, description: siteDescription } =
-    pageData.generalSettings;
-  const primaryMenu = pageData.headerMenuItems.nodes ?? [];
-  const categories = pageData.categories.nodes;
 
   const {
     data: searchResultsData,
@@ -45,6 +42,18 @@ export default function Page() {
     fetchPolicy: 'network-only',
   });
 
+  if (pageLoading || !pageData) return null;
+
+  const { title: siteTitle, description: siteDescription } =
+    pageData?.generalSettings ?? {};
+
+  const primaryMenu = pageData?.headerMenuItems?.nodes ?? [];
+  const quickLinks = pageData?.quickFooterMenuItems?.nodes ?? [];
+  const aboutLinks = pageData?.aboutFooterMenuItems?.nodes ?? [];
+  const navOne = pageData?.footerSecondaryMenuItems?.nodes ?? [];
+  const navTwo = pageData?.footerTertiaryMenuItems?.nodes ?? [];
+  const resources = pageData?.resourcesFooterMenuItems?.nodes ?? [];
+
   return (
     <>
       <SEO title={siteTitle} description={siteDescription} />
@@ -58,11 +67,11 @@ export default function Page() {
       <Main>
         <div className={styles['search-header-pane']}>
           <div className="container small">
-            <h2 className={styles['search-header-text']}>
+            <h1 className={styles['search-header-text']}>
               {searchQuery && !searchResultsLoading
                 ? `Showing results for "${searchQuery}"`
                 : `Search`}
-            </h2>
+            </h1>
             <SearchInput
               value={searchQuery}
               onChange={(newValue) => setSearchQuery(newValue)}
@@ -79,7 +88,7 @@ export default function Page() {
 
           <SearchResults
             searchResults={searchResultsData?.contentNodes?.edges?.map(
-              ({ node }) => node
+              ({ node }) => node,
             )}
             isLoading={searchResultsLoading}
           />
@@ -100,12 +109,17 @@ export default function Page() {
               </Button>
             </div>
           )}
-
-          {!searchResultsLoading && searchResultsData === undefined && (
-            <SearchRecommendations categories={categories} />
-          )}
         </div>
       </Main>
+
+      <Footer
+        title={siteTitle}
+        menuItems={quickLinks}             // left column: Quick Links
+        navOneMenuItems={navOne}          // middle column
+        navTwoMenuItems={navTwo}          // right column
+        resourcesMenuItems={resources}    // bottom row links
+        aboutMenuItems={aboutLinks}       // bottom row links
+      />
     </>
   );
 }
@@ -113,7 +127,11 @@ export default function Page() {
 Page.variables = () => {
   return {
     headerLocation: MENUS.PRIMARY_LOCATION,
-    footerLocation: MENUS.FOOTER_LOCATION,
+    quickFooterLocation: MENUS.QUICK_FOOTER_LOCATION,
+    aboutFooterLocation: MENUS.ABOUT_FOOTER_LOCATION,
+    footerSecondaryLocation: MENUS.FOOTER_SECONDARY_LOCATION,
+    footerTertiaryLocation: MENUS.FOOTER_TERTIARY_LOCATION,
+    resourcesFooterLocation: MENUS.RESOURCES_FOOTER_LOCATION,
   };
 };
 
@@ -122,26 +140,67 @@ Page.query = gql`
   ${NavigationMenu.fragments.entry}
   query GetPageData(
     $headerLocation: MenuLocationEnum
-    $footerLocation: MenuLocationEnum
+    $quickFooterLocation: MenuLocationEnum
+    $aboutFooterLocation: MenuLocationEnum
+    $footerSecondaryLocation: MenuLocationEnum
+    $footerTertiaryLocation: MenuLocationEnum
+    $resourcesFooterLocation: MenuLocationEnum
   ) {
     generalSettings {
       ...BlogInfoFragment
     }
-    headerMenuItems: menuItems(where: { location: $headerLocation }) {
+
+    headerMenuItems: menuItems(
+      where: { location: $headerLocation }
+      first: 100
+    ) {
       nodes {
         ...NavigationMenuItemFragment
       }
     }
-    footerMenuItems: menuItems(where: { location: $footerLocation }) {
+
+    quickFooterMenuItems: menuItems(
+      where: { location: $quickFooterLocation }
+      first: 100
+    ) {
       nodes {
         ...NavigationMenuItemFragment
       }
     }
-    categories {
+
+    aboutFooterMenuItems: menuItems(
+      where: { location: $aboutFooterLocation }
+      first: 100
+    ) {
       nodes {
-        databaseId
-        uri
-        name
+        ...NavigationMenuItemFragment
+      }
+    }
+
+    footerSecondaryMenuItems: menuItems(
+      where: { location: $footerSecondaryLocation }
+      first: 100
+    ) {
+      nodes {
+        ...NavigationMenuItemFragment
+      }
+    }
+
+    footerTertiaryMenuItems: menuItems(
+      where: { location: $footerTertiaryLocation }
+      first: 100
+    ) {
+      nodes {
+        ...NavigationMenuItemFragment
+      }
+    }
+
+    resourcesFooterMenuItems: menuItems(
+      where: { location: $resourcesFooterLocation }
+      first: 100
+    ) {
+      nodes {
+        ...NavigationMenuItemFragment
       }
     }
   }
