@@ -8,6 +8,23 @@ module.exports = withFaust({
   sassOptions: {
     includePaths: ['node_modules'],
   },
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN',
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: "frame-ancestors 'self'",
+          },
+        ],
+      },
+    ];
+  },
   images: {
     domains: [
       getWpHostname(),             
