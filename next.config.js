@@ -7,7 +7,7 @@ const contentSecurityPolicy = [
   "object-src 'none'",
   "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://use.typekit.net https://cdnjs.cloudflare.com",
-  "font-src 'self' data: https://fonts.gstatic.com https://use.typekit.net",
+  "font-src 'self' data: https://fonts.gstatic.com https://use.typekit.net https://cdnjs.cloudflare.com",
   "img-src 'self' data: blob: https:",
   "connect-src 'self' https://cms.calmaritimecorporation.org https://bpmaritimecorp.wpenginepowered.com https://formspree.io https://api.formspree.com",
   "form-action 'self' https://formspree.io https://api.formspree.com",
