@@ -3,6 +3,7 @@ import { gql } from '@apollo/client';
 import Link from 'next/link';
 import { useEffect, useRef, useState, forwardRef } from 'react';
 import classNames from 'classnames/bind';
+import { getLinkRel } from 'utilities';
 
 import styles from './NavigationMenu.module.scss';
 
@@ -69,12 +70,11 @@ const NavigationMenu = forwardRef(function NavigationMenu(
   // helper: build link props (honors WP "open in new tab")
   const mkLinkProps = (item, extraClass) => {
     const target = item?.target === '_blank' ? '_blank' : undefined;
-    const rel = target ? 'noopener noreferrer' : undefined;
     return {
       href: item?.path ?? '',
       className: cx('item-link', extraClass),
       target,
-      rel,
+      rel: getLinkRel({ href: item?.path, target }),
     };
   };
 

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { getLinkRel } from 'utilities';
 
 import styles from './Button.module.scss';
 
@@ -16,6 +17,8 @@ export default function Button({
   styleType,
   className,
   children,
+  rel,
+  target,
   ...props
 }) {
   const buttonStyle = styleType === 'secondary' ? 'secondary' : 'primary';
@@ -34,6 +37,8 @@ export default function Button({
         href={href}
         className={buttonClassName}
         role="button"
+        target={target}
+        rel={getLinkRel({ href, rel, target })}
         {...props}
       >
         {children}

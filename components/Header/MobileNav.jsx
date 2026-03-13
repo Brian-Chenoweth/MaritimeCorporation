@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { useState, useMemo } from 'react';
 import classNames from 'classnames/bind';
+import { getLinkRel } from 'utilities';
 
 import styles from './Header.module.scss';
 
@@ -58,7 +59,17 @@ export default function MobileNav({ menuItems, className, children, onNavigate }
 
       return (
         <li key={item.id} className={cx('mnav__li')} style={indentVar}>
-          <Link href={item.path ?? '#'} className={cx('mnav__row', 'mnav__link')} onClick={onNavigate}>
+          <Link
+            href={item.path ?? '#'}
+            passHref
+            className={cx('mnav__row', 'mnav__link')}
+            target={item?.target === '_blank' ? '_blank' : undefined}
+            rel={getLinkRel({
+              href: item.path,
+              target: item?.target === '_blank' ? '_blank' : undefined,
+            })}
+            onClick={onNavigate}
+          >
             <span className={cx('mnav__label')}>{item.label}</span>
           </Link>
         </li>

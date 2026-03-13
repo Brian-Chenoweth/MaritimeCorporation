@@ -54,7 +54,7 @@ export default function Footer({
                 <a
                   href="https://maps.app.goo.gl/wfAGSv2u8VPyjxgR6"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="nofollow external noopener noreferrer"
                   className={cx('phone')}
                 >
                   200 Maritime Academy Dr., Vallejo, CA 94590
@@ -68,8 +68,12 @@ export default function Footer({
 
             <div className={cx('logo-address')}>
               <div className={cx('logo')}>
-                {/* modern Link wrapping Image */}
-                <Link href="https://www.calpoly.edu/" title="Home" target='_blank' rel='noopener noreferrer'>
+                <a
+                  href="https://www.calpoly.edu/"
+                  title="Home"
+                  target="_blank"
+                  rel="nofollow external noopener noreferrer"
+                >
                   <Image
                     src="/logo.png"
                     width={400}
@@ -77,7 +81,7 @@ export default function Footer({
                     alt="Cal Poly University logo"
                     layout="responsive"
                   />
-                </Link>
+                </a>
               </div>
 
               <p>1 Grand Avenue, San Luis Obispo, CA 93407</p>
@@ -90,7 +94,7 @@ export default function Footer({
                       <li>
                         <a
                           target="_blank"
-                          rel="noopener noreferrer"
+                          rel="nofollow external noopener noreferrer"
                           className={cx('social-icon-link')}
                           href={appConfig.socialLinks.instagramUrl}
                         >
@@ -103,7 +107,7 @@ export default function Footer({
                       <li>
                         <a
                           target="_blank"
-                          rel="noopener noreferrer"
+                          rel="nofollow external noopener noreferrer"
                           className={cx('social-icon-link')}
                           href={appConfig.socialLinks.twitterUrl}
                         >
@@ -116,7 +120,7 @@ export default function Footer({
                       <li>
                         <a
                           target="_blank"
-                          rel="noopener noreferrer"
+                          rel="nofollow external noopener noreferrer"
                           className={cx('social-icon-link')}
                           href={appConfig.socialLinks.facebookUrl}
                         >
