@@ -1,8 +1,12 @@
 import * as MENUS from 'constants/menus';
 
 import { gql } from '@apollo/client';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+import { createPortal } from 'react-dom';
+import { useEffect, useState } from 'react';
 import { BlogInfoFragment } from 'fragments/GeneralSettings';
-import { pageTitle } from 'utilities';
+import { getSiteUrl, pageTitle } from 'utilities';
 
 import {
   Header,
@@ -14,11 +18,6 @@ import {
   FeaturedImage,
   SEO,
 } from '../components';
-
-import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
-import { useRouter } from 'next/router';
 
 // Client-only form to avoid SSR/client mismatch
 const ContactForm = dynamic(() => import('components/ContactForm'), { ssr: false });
@@ -72,7 +71,7 @@ export default function Component(props) {
     featuredImage?.node?.sourceUrl ||
     '/images/og-default.jpg';
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  const baseUrl = getSiteUrl();
   const computedCanonical =
     s?.canonical ||
     (baseUrl && router?.asPath ? `${baseUrl}${router.asPath}` : undefined);

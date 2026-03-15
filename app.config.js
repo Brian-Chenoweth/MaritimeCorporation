@@ -3,6 +3,11 @@
  */
 const appConfig = {
   /**
+   * Public site origin used for absolute metadata such as canonical URLs.
+   */
+  siteUrl: 'https://calmaritimecorporation.org',
+
+  /**
    * The number of posts to fetch per 'page'.
    */
   postsPerPage: 9,

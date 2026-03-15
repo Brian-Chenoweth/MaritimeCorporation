@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { getSiteUrl } from 'utilities';
 
 /**
  * SEO component for Faust/Next.js
@@ -45,6 +46,24 @@ function toAbsoluteUrl(urlOrPath, base) {
   }
 }
 
+function getCanonicalUrl(urlOrPath, base) {
+  const absoluteUrl = toAbsoluteUrl(urlOrPath, base);
+
+  if (!absoluteUrl) return undefined;
+
+  try {
+    const normalizedUrl = new URL(absoluteUrl);
+    normalizedUrl.hash = '';
+
+    // Canonicals should not vary on tracking or UI query params.
+    normalizedUrl.search = '';
+
+    return normalizedUrl.toString();
+  } catch {
+    return absoluteUrl;
+  }
+}
+
 export default function SEO({
   title,
   description,
@@ -61,12 +80,9 @@ export default function SEO({
 }) {
   const router = useRouter();
 
-  const baseUrl =
-    typeof process !== 'undefined' ? process.env.NEXT_PUBLIC_SITE_URL : undefined;
+  const baseUrl = getSiteUrl();
 
-  const canonical =
-    url ||
-    (baseUrl && router?.asPath ? toAbsoluteUrl(router.asPath, baseUrl) : undefined);
+  const canonical = getCanonicalUrl(url || router?.asPath, baseUrl);
 
   const resolvedTitle = title || DEFAULTS.defaultTitle;
   const resolvedDescription = description || DEFAULTS.defaultDescription;
